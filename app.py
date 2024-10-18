@@ -44,12 +44,15 @@ if theme == "Gradient":
             color: black;
         }
         .chat-container {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgb(255, 255, 255);  /* Fully opaque */
             border-radius: 15px;
             padding: 20px;
             max-width: 800px;
             margin: auto;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .stChatMessage {
+            color: black;  /* Text color for chat messages */
         }
         </style>
         """, unsafe_allow_html=True)
@@ -64,12 +67,15 @@ elif theme == "Solid Color":
             color: black;
         }
         .chat-container {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgb(255, 255, 255);  /* Fully opaque */
             border-radius: 15px;
             padding: 20px;
             max-width: 800px;
             margin: auto;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .stChatMessage {
+            color: black;  /* Text color for chat messages */
         }
         </style>
         """, unsafe_allow_html=True)
@@ -86,7 +92,7 @@ elif theme == "Background Image":
             color: white;
         }
         .chat-container {
-            background-color: rgba(0, 0, 0, 0.7);  /* Increased opacity for better text visibility */
+            background-color: rgb(0, 0, 0);  /* Fully opaque */
             border-radius: 15px;
             padding: 20px;
             max-width: 800px;
@@ -94,6 +100,7 @@ elif theme == "Background Image":
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         .stChatMessage {
+            color: white;  /* Text color for chat messages */
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);  /* Add text shadow for better contrast */
         }
         </style>
@@ -109,12 +116,15 @@ else:  # Default theme
             color: black;
         }
         .chat-container {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgb(255, 255, 255);  /* Fully opaque */
             border-radius: 15px;
             padding: 20px;
             max-width: 800px;
             margin: auto;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .stChatMessage {
+            color: black;  /* Text color for chat messages */
         }
         </style>
         """, unsafe_allow_html=True)
