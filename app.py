@@ -382,12 +382,6 @@
 
 
 
-
-
-
-
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -542,10 +536,10 @@ if submit_button and user_input:
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
 
-# Display chat history (recent chats appear at the top)
+# Display chat history (newer messages appear at the top)
 with st.container():
     st.markdown('<div class="chat-container">', unsafe_allow_html=True)
-    for chat in st.session_state.history:
+    for chat in reversed(st.session_state.history):  # Reverse the history order here
         # User message
         st.markdown(
             f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
@@ -556,5 +550,3 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
-
