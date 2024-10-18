@@ -57,12 +57,6 @@
 
 
 
-
-
-
-
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -92,17 +86,33 @@ def chat(message):
 # Streamlit UI
 st.title("Linguist AI: Your Professional Chatbot")
 
-# Create two columns for images
-col1, col2 = st.columns(2)
-
-# Add images to the columns
-with col1:
-    st.image("lion.jpeg", caption="Dragon", use_column_width=True)  # Replace with your dragon image path or URL
-
-with col2:
-    st.image("Glows.jpeg", caption="Other Animal", use_column_width=True)  # Replace with your other animal image URL
-
-st.markdown("<style> .stChatMessage {border-radius: 15px; padding: 10px;} </style>", unsafe_allow_html=True)
+# Set the background image using CSS
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url('Glows.jpeg'); /* Replace with your image URL */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        color: white; /* Adjust text color for better visibility */
+    }
+    .chat-container {
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 800px; /* Set a max width for the chat area */
+        margin: auto; /* Center the chat area */
+    }
+    .stChatMessage {
+        border-radius: 15px; 
+        padding: 10px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 if 'history' not in st.session_state:
     st.session_state.history = []
@@ -116,7 +126,14 @@ if submit_button and user_input:
     response = chat(user_input)
     st.session_state.history.append({"user": user_input, "bot": response})
 
-# Display chat history
-for chat in st.session_state.history:
-    st.markdown(f"<div class='stChatMessage' style='background-color: #E1FFC7; margin: 5px 0; border-radius: 10px; padding: 10px;'>{chat['user']}</div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='stChatMessage' style='background-color: #D1E7FF; margin: 5px 0; border-radius: 10px; padding: 10px;'>{chat['bot']}</div>", unsafe_allow_html=True)
+# Display chat history in a styled container
+with st.container():
+    for chat in st.session_state.history:
+        st.markdown(
+            f"<div class='chat-container'><div class='stChatMessage' style='background-color: #E1FFC7; margin: 5px 0;'>{chat['user']}</div></div>",
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            f"<div class='chat-container'><div class='stChatMessage' style='background-color: #D1E7FF; margin: 5px 0;'>{chat['bot']}</div></div>",
+            unsafe_allow_html=True
+        )
