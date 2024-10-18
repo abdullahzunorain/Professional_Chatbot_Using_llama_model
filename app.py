@@ -91,7 +91,7 @@ with col1:
     st.image("lion.jpeg", caption="Dragon", use_column_width=True)  # Replace with your dragon image path or URL
 
 with col2:
-    st.image("https://example.com/animal_image.jpg", caption="Other Animal", use_column_width=True)  # Replace with your other animal image URL
+    st.image("Glows.jpeg", caption="Other Animal", use_column_width=True)  # Replace with your other animal image URL
 
 st.markdown("<style> .stChatMessage {border-radius: 15px; padding: 10px;} </style>", unsafe_allow_html=True)
 
