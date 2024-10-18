@@ -379,7 +379,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -518,22 +517,16 @@ st.markdown(
         display: flex;  /* Use flexbox for layout */
         align-items: center;  /* Center vertically */
     }
-    .stTextInput {
-        flex-grow: 1;  /* Make input fill the remaining space */
-        margin-right: 10px;  /* Space between input and button */
-    }
-    .stButton {
-        /* Add any specific styles for the button here if needed */
-    }
     </style>
     """, unsafe_allow_html=True)
 
-# Create a form for user input with button
+# Create a form for user input
 with st.form(key='chat_form', clear_on_submit=True):
     user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
+    submit_button = st.form_submit_button("Send")  # Submit button added here
 
-# Simulate typing indicator
-if st.button("Send") and user_input:  # Use st.button here to submit the form
+# Simulate typing indicator and process input
+if submit_button and user_input:  # Check if the button was clicked
     with st.spinner("Linguist AI is typing..."):
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
@@ -552,3 +545,4 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
