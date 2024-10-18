@@ -64,14 +64,6 @@
 
 
 
-
-
-
-
-
-
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -157,9 +149,12 @@ with st.form(key='chat_form', clear_on_submit=True):
     submit_button = st.form_submit_button("Send")
 
 # Handle user input
-if submit_button and user_input:
-    response = chat(user_input)
-    st.session_state.history.append({"user": user_input, "bot": response})
+if submit_button:
+    if user_input:  # Check if user input is not empty
+        response = chat(user_input)
+        st.session_state.history.append({"user": user_input, "bot": response})
+    else:
+        st.warning("Please enter a message before sending.")  # Notify user to enter a message
 
 # Sidebar for settings
 st.sidebar.header("Settings")
