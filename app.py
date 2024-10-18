@@ -390,7 +390,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -407,11 +406,11 @@ def chat(message):
                 {"role": "system", "content": "You are a helpful assistant, responding with clarity."},
                 {"role": "user", "content": message},
             ],
-            model="llama3-8b-8192",  # You can switch to a different model if needed
-            temperature=0.7,  # Slightly higher to make responses more dynamic
-            max_tokens=3000,  # Increase token limit for longer, more detailed responses
-            top_p=0.9,  # Adjust for more varied responses
-            stream=False,  # You can change this to True if real-time streaming is available
+            model="llama3-8b-8192",
+            temperature=0.7,  
+            max_tokens=3000,  
+            top_p=0.9,  
+            stream=False,  
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
@@ -485,14 +484,14 @@ else:  # Default theme
 if 'history' not in st.session_state:
     st.session_state.history = []
 
-# Custom CSS for layout improvements
+# Custom CSS to fix the input box at the bottom
 st.markdown(
     """
     <style>
     .chat-container {
         max-height: 80vh;
         overflow-y: auto;
-        margin-bottom: 20px;
+        margin-bottom: 80px;  /* Space for the fixed input box */
         display: flex;
         flex-direction: column-reverse;
     }
@@ -527,11 +526,28 @@ st.markdown(
         padding: 10px;
         background-color: white;
         z-index: 9999;
+        box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .stTextInput {
+        width: 80%;
+        margin-right: 10px;
+    }
+    .stButton button {
+        width: 15%;
+        background-color: #008CBA;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+    .stButton button:hover {
+        background-color: #00688B;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# Create form for user input at the bottom of the chat
+# Create form for user input fixed at the bottom of the chat
 with st.form(key='chat_form', clear_on_submit=True):
     st.markdown('<div class="input-container">', unsafe_allow_html=True)
     user_input = st.text_input("Type your message here...", label_visibility="collapsed")
@@ -558,6 +574,3 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
-
-
