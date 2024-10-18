@@ -377,8 +377,6 @@
 
 
 
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -481,6 +479,9 @@ st.markdown(
         max-height: 80vh;  /* Adjust the height to make space for input at bottom */
         overflow-y: auto;   /* Enable vertical scrolling */
         margin-bottom: 100px;  /* Space between chat and input */
+        padding: 10px;  /* Padding inside chat container */
+        border: 1px solid #ccc;  /* Optional border */
+        border-radius: 10px;  /* Rounded corners */
     }
     .user-message {
         background-color: #E1FFC7;
@@ -548,7 +549,7 @@ with st.form(key='chat_form', clear_on_submit=True):
     submit_button = st.form_submit_button("Send")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Simulate typing indicator
+# Simulate typing indicator and handle button click
 if submit_button and user_input:
     with st.spinner("Linguist AI is typing..."):
         response = chat(user_input)
@@ -568,3 +569,4 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
