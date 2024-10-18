@@ -91,10 +91,10 @@ elif theme == "Background Image":
             height: 100vh;
             color: white;
         }
-        /* Ensure the title is fully white without any transparency */
+        /* Ensure the title is fully white with a black outline for visibility */
         .stTitle {
             color: #FFFFFF !important;  /* Fully white color */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);  /* Adding shadow for visibility */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);  /* Solid black shadow for better visibility */
         }
         .chat-container {
             background-color: rgba(0, 0, 0, 0.7);  /* Slightly darker for better contrast */
@@ -110,6 +110,7 @@ elif theme == "Background Image":
         }
         </style>
         """, unsafe_allow_html=True)
+
 
 else:  # Default theme
     st.markdown(
