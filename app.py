@@ -167,9 +167,6 @@
 
 
 
-
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -187,7 +184,7 @@ def chat(message):
             ],
             model="llama3-8b-8192",
             temperature=0.5,
-            max_tokens=512,  # Increased the token limit
+            max_tokens=512,
             top_p=1,
             stop=None,
             stream=False,
@@ -251,7 +248,7 @@ elif theme == "Background Image":
         """
         <style>
         .stApp {
-            background-image: url('https://github.com/abdullahzunorain/chatbot/blob/main/lion.jpeg'); /* Replace with your image URL */
+            background-image: url('https://raw.githubusercontent.com/abdullahzunorain/chatbot/main/lion.jpeg'); /* Use the raw URL */
             background-size: cover;
             background-position: center;
             height: 100vh;
