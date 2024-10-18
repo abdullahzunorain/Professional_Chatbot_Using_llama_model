@@ -555,10 +555,10 @@ st.markdown(
     </style>
     """, unsafe_allow_html=True)
 
-# Create a form for user input
-with st.form(key='chat_form', clear_on_submit=True):
-    user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
-    submit_button = st.form_submit_button("Send")
+# # Create a form for user input
+# with st.form(key='chat_form', clear_on_submit=True):
+#     user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
+#     submit_button = st.form_submit_button("Send")
 
 # Simulate typing indicator
 if submit_button and user_input:
