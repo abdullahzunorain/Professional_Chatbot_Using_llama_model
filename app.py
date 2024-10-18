@@ -79,19 +79,22 @@ elif theme == "Background Image":
         """
         <style>
         .stApp {
-            background-image: url('https://raw.githubusercontent.com/abdullahzunorain/chatbot/main/pexels-broderick-armbrister-1186919-6462662.jpg'); /* Use the raw URL */
+            background-image: url('https://raw.githubusercontent.com/abdullahzunorain/chatbot/main/pexels-broderick-armbrister-1186919-6462662.jpg');
             background-size: cover;
             background-position: center;
             height: 100vh;
             color: white;
         }
         .chat-container {
-            background-color: rgba(0, 0, 0, 0.7);  /* More opaque for better visibility */
+            background-color: rgba(0, 0, 0, 0.7);  /* Increased opacity for better text visibility */
             border-radius: 15px;
             padding: 20px;
             max-width: 800px;
             margin: auto;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .stChatMessage {
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);  /* Add text shadow for better contrast */
         }
         </style>
         """, unsafe_allow_html=True)
@@ -134,10 +137,10 @@ if submit_button and user_input:
 with st.container():
     for chat in st.session_state.history:
         st.markdown(
-            f"<div class='chat-container'><div class='stChatMessage' style='background-color: #E1FFC7; margin: 5px 0; color: black;'>{chat['user']}</div></div>",
+            f"<div class='chat-container'><div class='stChatMessage' style='background-color: #E1FFC7; margin: 5px 0;'>{chat['user']}</div></div>",
             unsafe_allow_html=True
         )
         st.markdown(
-            f"<div class='chat-container'><div class='stChatMessage' style='background-color: #D1E7FF; margin: 5px 0; color: black;'>{chat['bot']}</div></div>",
+            f"<div class='chat-container'><div class='stChatMessage' style='background-color: #D1E7FF; margin: 5px 0;'>{chat['bot']}</div></div>",
             unsafe_allow_html=True
         )
