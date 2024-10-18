@@ -72,7 +72,7 @@ def chat(message):
             ],
             model="llama3-8b-8192",
             temperature=0.5,
-            max_tokens=256,
+            max_tokens=512,  # Increased the token limit
             top_p=1,
             stop=None,
             stream=False,
