@@ -379,7 +379,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -513,7 +512,7 @@ st.markdown(
     /* Fixed position for input box and button at the bottom center */
     .input-container {
         position: fixed;  /* Fix the input box at the bottom */
-        bottom: 0;  /* Align to bottom */
+        bottom: 20px;  /* Align to bottom */
         left: 50%;
         transform: translateX(-50%);
         display: flex;
