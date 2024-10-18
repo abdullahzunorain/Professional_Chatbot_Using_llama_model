@@ -380,8 +380,6 @@
 
 
 
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -483,7 +481,7 @@ st.markdown(
     .chat-container {
         max-height: 70vh;  /* Adjust the height as necessary */
         overflow-y: auto;   /* Enable vertical scrolling */
-        margin-bottom: 60px;  /* Space between chat and input */
+        margin-bottom: 70px;  /* Space between chat and input */
     }
     .user-message {
         background-color: #E1FFC7;
@@ -512,19 +510,30 @@ st.markdown(
         clear: both;
         display: table;
     }
+    .input-container {
+        position: fixed;
+        bottom: 10px;  /* Adjust distance from the bottom */
+        left: 20px;    /* Adjust distance from the left */
+        right: 20px;   /* Add some space on the right */
+        display: flex;  /* Use flexbox for layout */
+        align-items: center;  /* Center vertically */
+    }
+    .stTextInput {
+        flex-grow: 1;  /* Make input fill the remaining space */
+        margin-right: 10px;  /* Space between input and button */
+    }
+    .stButton {
+        /* Add any specific styles for the button here if needed */
+    }
     </style>
     """, unsafe_allow_html=True)
 
 # Create a form for user input with button
 with st.form(key='chat_form', clear_on_submit=True):
-    col1, col2 = st.columns([5, 1])  # Adjust columns for input and button
-    with col1:
-        user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
-    with col2:
-        submit_button = st.form_submit_button("Send")
+    user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
 
 # Simulate typing indicator
-if submit_button and user_input:
+if st.button("Send") and user_input:  # Use st.button here to submit the form
     with st.spinner("Linguist AI is typing..."):
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
@@ -543,23 +552,3 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
-# Position the input field and button statically at the bottom
-st.markdown(
-    """
-    <style>
-    .stTextInput {
-        position: fixed;
-        bottom: 70px;  /* Adjust distance from the bottom */
-        left: 20px;  /* Adjust distance from the left */
-        width: 60%;  /* Width of the input box */
-        z-index: 1;  /* Ensure it's above other elements */
-    }
-    .stButton {
-        position: fixed;
-        bottom: 70px;  /* Align button with the input box */
-        left: 85%;  /* Adjust button position as needed */
-        z-index: 1;  /* Ensure it's above other elements */
-    }
-    </style>
-    """, unsafe_allow_html=True)
