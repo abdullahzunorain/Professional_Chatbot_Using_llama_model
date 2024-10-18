@@ -562,37 +562,7 @@ with st.form(key='chat_form', clear_on_submit=True):
     submit_button = st.form_submit_button("Send")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Custom CSS for the input box at the bottom
-st.markdown(
-    """
-    <style>
-    .input-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 100;
-    }
-    .stTextInput {
-        width: 80%;
-        padding: 10px;
-        font-size: 16px;
-    }
-    .stButton button {
-        width: 18%;
-        padding: 10px;
-        background-color: #008CBA;
-        color: white;
-        border: none;
-        font-size: 16px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+
 
 
 # Simulate typing indicator
