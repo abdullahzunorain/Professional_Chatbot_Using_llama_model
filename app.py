@@ -51,6 +51,10 @@
 
 
 
+
+
+
+
 import streamlit as st
 import os
 from groq import Groq
@@ -110,6 +114,14 @@ st.markdown(
             background-color: #fff;
             padding: 10px;
             margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .empty-chat {
+            color: #999;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 50px;
         }
         .user-message {
             background-color: #E1FFC7;
@@ -191,10 +203,13 @@ st.session_state.max_tokens = st.sidebar.slider(
 # Chat container
 st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
 
-# Display chat history
-for chat in st.session_state.history:
-    st.markdown(f"<div class='user-message'>{chat['user']}</div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='bot-message'>{chat['bot']}</div>", unsafe_allow_html=True)
+# Display chat history or welcome message
+if not st.session_state.history:
+    st.markdown("<div class='empty-chat'>Welcome! Type your message above to start chatting!</div>", unsafe_allow_html=True)
+else:
+    for chat in st.session_state.history:
+        st.markdown(f"<div class='user-message'>{chat['user']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='bot-message'>{chat['bot']}</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
 
