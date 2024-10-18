@@ -51,17 +51,18 @@
 
 
 
+
+
 import streamlit as st
 import os
 from groq import Groq
 
+# Set page configuration (must be the first command)
+st.set_page_config(page_title="Linguist AI", page_icon="🤖", layout="wide")  # Custom page title and icon
+
 # Set up Groq API client
 key = os.getenv("GROQ_API")
 client = Groq(api_key=key)
-
-# Set page configuration
-st.set_page_config(page_title="Linguist AI", page_icon="🤖", layout="wide")  # Must be first
-
 
 def chat(message):
     try:
@@ -80,9 +81,6 @@ def chat(message):
         return chat_completion.choices[0].message.content
     except Exception as e:
         return "Sorry, something went wrong: " + str(e)
-
-# Streamlit UI
-st.set_page_config(page_title="Linguist AI", page_icon="🤖", layout="wide")  # Custom page title and icon
 
 # Background styling
 st.markdown(
@@ -133,4 +131,3 @@ for chat in st.session_state.history:
 # Add a footer
 st.markdown("---")
 st.markdown("### Need help? Just ask me!")
-
