@@ -92,11 +92,11 @@ elif theme == "Background Image":
             color: white;
         }
         .stTitle {
-            color: white;
+            color: white !important;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);  /* Adding shadow for visibility */
         }
         .chat-container {
-            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.5);
             border-radius: 15px;
             padding: 20px;
             max-width: 800px;
