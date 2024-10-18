@@ -377,6 +377,9 @@
 
 
 
+
+
+
 import streamlit as st
 import os
 from groq import Groq
@@ -509,7 +512,7 @@ st.markdown(
     }
     /* Fixed position for input box and button at the bottom center */
     .input-container {
-        position: fixed;
+        position: fixed;  /* Fix the input box at the bottom */
         bottom: 0;  /* Align to bottom */
         left: 50%;
         transform: translateX(-50%);
@@ -566,4 +569,3 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
