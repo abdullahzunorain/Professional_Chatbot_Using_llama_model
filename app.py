@@ -91,12 +91,13 @@ elif theme == "Background Image":
             height: 100vh;
             color: white;
         }
+        /* Ensure the title is fully white without any transparency */
         .stTitle {
-            color: white !important;
+            color: #FFFFFF !important;  /* Fully white color */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);  /* Adding shadow for visibility */
         }
         .chat-container {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);  /* Slightly darker for better contrast */
             border-radius: 15px;
             padding: 20px;
             max-width: 800px;
@@ -104,7 +105,7 @@ elif theme == "Background Image":
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         .stChatMessage {
-            color: white;
+            color: white;  /* Chat message color */
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);  /* Add text shadow for better contrast */
         }
         </style>
