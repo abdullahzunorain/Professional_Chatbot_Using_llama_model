@@ -251,7 +251,7 @@ elif theme == "Background Image":
         """
         <style>
         .stApp {
-            background-image: url('https://example.com/your-image.jpg'); /* Replace with your image URL */
+            background-image: url('lion.jpeg'); /* Replace with your image URL */
             background-size: cover;
             background-position: center;
             height: 100vh;
