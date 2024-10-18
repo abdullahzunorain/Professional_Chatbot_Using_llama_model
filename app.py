@@ -66,8 +66,12 @@ st.set_page_config(page_title="Linguist AI", page_icon="🤖", layout="wide")
 key = os.getenv("GROQ_API")
 client = Groq(api_key=key)
 
+
 # Define chat function
 def chat(message, temperature, max_tokens):
+    if message is None or message.strip() == "":
+        return "Please enter a valid message."
+
     try:
         chat_completion = client.chat.completions.create(
             messages=[
@@ -83,7 +87,11 @@ def chat(message, temperature, max_tokens):
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
+        # Log the error message
+        print(f"Error occurred: {str(e)}")
         return "Sorry, something went wrong: " + str(e)
+
+
 
 # HTML and CSS for custom styling
 st.markdown(
