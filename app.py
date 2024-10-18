@@ -176,6 +176,9 @@
 
 
 
+
+
+
 import streamlit as st
 import os
 from groq import Groq
@@ -275,7 +278,7 @@ st.markdown(
     """
     <style>
     .chat-container {
-        max-height: 70vh;  /* Adjust the height as necessary */
+        max-height: 80vh;  /* Adjust the height to make space for input at bottom */
         overflow-y: auto;   /* Enable vertical scrolling */
         margin-bottom: 10px;  /* Space between chat and input */
     }
@@ -315,6 +318,10 @@ st.markdown(
         display: flex;
         width: 60%;
         z-index: 1;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
     .stTextInput {
         flex-grow: 1;
@@ -361,3 +368,4 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
