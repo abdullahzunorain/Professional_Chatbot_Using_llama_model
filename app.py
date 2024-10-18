@@ -49,8 +49,12 @@
 
 
 
+
+
+
 import streamlit as st
 import os
+import time
 from groq import Groq
 
 # Set up Groq API client
@@ -109,6 +113,11 @@ st.markdown(
         padding: 10px;
         font-size: 16px; /* Increased input text size */
     }
+
+    .typing {
+        color: gray;
+        font-style: italic;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -117,14 +126,27 @@ st.markdown(
 if 'history' not in st.session_state:
     st.session_state.history = []
 
+# Quick reply options
+quick_replies = ["Hello", "How are you?", "Tell me a joke", "What can you do?"]
+
 # Create a form for user input
 with st.form(key='chat_form', clear_on_submit=True):
     user_input = st.text_input("You:", placeholder="Type your message here...")
     submit_button = st.form_submit_button("Send")
+    
+# Display quick reply buttons
+cols = st.columns(len(quick_replies))
+for i, reply in enumerate(quick_replies):
+    if cols[i].button(reply):
+        user_input = reply
+        submit_button = True
 
+# Simulate typing indicator
 if submit_button and user_input:
-    response = chat(user_input)
-    st.session_state.history.append({"user": user_input, "bot": response})
+    with st.spinner("Linguist AI is typing..."):
+        time.sleep(1)  # Simulate response time
+        response = chat(user_input)
+        st.session_state.history.append({"user": user_input, "bot": response})
 
 # Display chat history in a styled container
 with st.container():
