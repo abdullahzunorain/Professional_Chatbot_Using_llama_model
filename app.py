@@ -256,7 +256,7 @@ elif theme == "Background Image":
         """
         <style>
         .stApp {
-            background-image: url('https://raw.githubusercontent.com/abdullahzunorain/chatbot/main/pexels-broderick-armbrister-1186919-6462662.jpg');
+            background-image: url('https://github.com/abdullahzunorain/chatbot/blob/main/ai-technology-brain-background-digital-transformation-concept.jpg');
             background-size: cover;
             background-position: center;
             height: 100vh;
