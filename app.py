@@ -256,7 +256,7 @@ elif theme == "Background Image":
         """
         <style>
         .stApp {
-            background-image: url('https://github.com/abdullahzunorain/chatbot/blob/main/ai-technology-brain-background-digital-transformation-concept.jpg');
+            background-image: url('https://raw.githubusercontent.com/abdullahzunorain/chatbot/main/ai-technology-brain-background-digital-transformation-concept.jpg');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -281,6 +281,7 @@ elif theme == "Background Image":
         }
         </style>
         """, unsafe_allow_html=True)
+
 
 else:  # Default theme
     st.markdown(
