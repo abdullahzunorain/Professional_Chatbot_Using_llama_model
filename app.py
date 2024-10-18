@@ -482,7 +482,8 @@ else:  # Default theme
 if 'history' not in st.session_state:
     st.session_state.history = []
 
-# Custom CSS for layout improvements
+
+# Custom CSS for chat layout with recent messages at the top
 st.markdown(
     """
     <style>
@@ -491,7 +492,7 @@ st.markdown(
         overflow-y: auto;
         margin-bottom: 20px;
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
     .user-message {
         background-color: #E1FFC7;
@@ -541,10 +542,10 @@ if submit_button and user_input:
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
 
-# Display chat history in reverse chronological order
+# Display chat history (recent chats appear at the top)
 with st.container():
     st.markdown('<div class="chat-container">', unsafe_allow_html=True)
-    for chat in reversed(st.session_state.history):
+    for chat in st.session_state.history:
         # User message
         st.markdown(
             f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
@@ -555,4 +556,5 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
 
