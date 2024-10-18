@@ -169,8 +169,6 @@
 
 
 
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -321,16 +319,49 @@ if submit_button and user_input:
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
 
-# Display chat history in a styled container
+# Custom CSS for chat layout
+st.markdown(
+    """
+    <style>
+    .user-message {
+        background-color: #E1FFC7;
+        text-align: left;
+        padding: 10px;
+        border-radius: 15px;
+        margin: 10px 10px 10px 0;
+        display: inline-block;
+        max-width: 60%;
+        color: black;
+    }
+    .bot-message {
+        background-color: #D1E7FF;
+        text-align: right;
+        padding: 10px;
+        border-radius: 15px;
+        margin: 10px 0 10px 10px;
+        display: inline-block;
+        max-width: 60%;
+        float: right;
+        color: black;
+    }
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# Display chat history in a styled container with user on the left and bot on the right
 with st.container():
     for chat in st.session_state.history:
-        # User input style
+        # User input style (left side)
         st.markdown(
-            f"<div class='chat-container' style='background-color: rgba(0, 0, 0, 0.1);'><div class='stChatMessage'>{chat['user']}</div></div>",
+            f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
             unsafe_allow_html=True
         )
-        # Bot response style
+        # Bot response style (right side)
         st.markdown(
-            f"<div class='chat-container' style='background-color: rgba(0, 0, 0, 0.2);'><div class='stChatMessage'>{chat['bot']}</div></div>",
+            f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True
         )
