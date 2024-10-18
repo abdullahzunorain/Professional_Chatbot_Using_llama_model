@@ -387,7 +387,11 @@ key = os.getenv("GROQ_API")  # Ensure your environment variable is set
 client = Groq(api_key=key)
 
 def chat(message):
+    print("Chat function called with message:", message)  # Debugging line
     try:
+        if not message.strip():
+            return "Please enter a valid message."
+
         chat_completion = client.chat.completions.create(
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -400,9 +404,13 @@ def chat(message):
             stop=None,
             stream=False,
         )
+        print("Chat completion received:", chat_completion)  # Debugging line
         return chat_completion.choices[0].message.content
     except Exception as e:
+        print("Error in chat function:", e)  # Debugging line
         return "Sorry, something went wrong: " + str(e)
+
+
 
 # Streamlit UI
 st.title("Linguist AI: Your Professional Chatbot")
