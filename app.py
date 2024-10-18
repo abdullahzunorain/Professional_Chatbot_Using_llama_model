@@ -54,7 +54,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -66,11 +65,17 @@ st.set_page_config(page_title="Linguist AI", page_icon="🤖", layout="wide")
 key = os.getenv("GROQ_API")
 client = Groq(api_key=key)
 
+# Ensure default session state values
+if 'temperature' not in st.session_state:
+    st.session_state.temperature = 0.5  # Default temperature
+
+if 'max_tokens' not in st.session_state:
+    st.session_state.max_tokens = 512  # Default max tokens
 
 # Define chat function
-def chat(message, temperature, max_tokens):
-    if not message or not temperature or not max_tokens:
-        return "Invalid input. Please check your message and settings."
+def chat(message, temperature=0.5, max_tokens=512):
+    if not message:
+        return "Please enter a message."
 
     try:
         chat_completion = client.chat.completions.create(
@@ -89,9 +94,6 @@ def chat(message, temperature, max_tokens):
     except Exception as e:
         print(f"Error occurred: {str(e)}")
         return "Sorry, something went wrong: " + str(e)
-
-
-
 
 # HTML and CSS for custom styling
 st.markdown(
@@ -122,14 +124,6 @@ st.markdown(
             background-color: #fff;
             padding: 10px;
             margin: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-        .empty-chat {
-            color: #999;
-            text-align: center;
-            font-size: 16px;
-            margin-top: 50px;
         }
         .user-message {
             background-color: #E1FFC7;
@@ -190,49 +184,42 @@ st.markdown("<div class='header'><h1>Linguist AI 🤖</h1></div>", unsafe_allow_
 if 'history' not in st.session_state:
     st.session_state.history = []
 
-# Initialize parameters in session state
-if 'temperature' not in st.session_state:
-    st.session_state.temperature = 0.5
-if 'max_tokens' not in st.session_state:
-    st.session_state.max_tokens = 512
-
-# Sidebar for settings
-st.sidebar.header("Settings")
-st.sidebar.subheader("Customize Chatbot")
-st.session_state.temperature = st.sidebar.slider(
-    "Response Creativity (Temperature)", 0.0, 1.0, st.session_state.temperature, 0.1,
-    help="Higher values make the output more random."
-)
-st.session_state.max_tokens = st.sidebar.slider(
-    "Max Tokens", 50, 1000, st.session_state.max_tokens, 50,
-    help="Adjust the maximum length of the response."
-)
-
 # Chat container
 st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
 
-# Display chat history or welcome message
-if not st.session_state.history:
-    st.markdown("<div class='empty-chat'>Welcome! Type your message above to start chatting!</div>", unsafe_allow_html=True)
-else:
-    for chat in st.session_state.history:
-        st.markdown(f"<div class='user-message'>{chat['user']}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='bot-message'>{chat['bot']}</div>", unsafe_allow_html=True)
+# Display chat history
+for chat in st.session_state.history:
+    st.markdown(f"<div class='user-message'>{chat['user']}</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='bot-message'>{chat['bot']}</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
 
 # User input form
 with st.form(key='chat_form', clear_on_submit=True):
-    user_input = st.text_input("Type your message here...", key='user_input', placeholder="Type your message here...")
-    submit_button = st.form_submit_button("Send", help="Click to send your message", type='primary')
+    user_input = st.text_input("Type your message here...", key='user_input', placeholder="Type your message here...").strip()
+    submit_button = st.form_submit_button("Send")
 
 # Handle user input
 if submit_button and user_input:
+    st.write(f"User Input: {user_input}")
+    st.write(f"Temperature: {st.session_state.temperature}")
+    st.write(f"Max Tokens: {st.session_state.max_tokens}")
+
     response = chat(user_input, st.session_state.temperature, st.session_state.max_tokens)
     st.session_state.history.append({"user": user_input, "bot": response})
 
 # Add a footer
 st.markdown("<footer>Need help? Just ask me!</footer>", unsafe_allow_html=True)
+
+# Additional Features
+st.sidebar.header("Settings")
+st.sidebar.subheader("Customize Chatbot")
+temperature = st.sidebar.slider("Response Creativity (Temperature)", 0.0, 1.0, st.session_state.temperature, 0.1)
+max_tokens = st.sidebar.slider("Max Tokens", 50, 1000, st.session_state.max_tokens, 50)
+
+# Update session state for temperature and max_tokens
+st.session_state.temperature = temperature
+st.session_state.max_tokens = max_tokens
 
 # Final enhancements
 st.markdown("""
