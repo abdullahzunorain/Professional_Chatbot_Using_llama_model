@@ -391,8 +391,6 @@
 
 
 
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -401,40 +399,40 @@ from groq import Groq
 key = os.getenv("GROQ_API")  # Ensure your environment variable is set
 client = Groq(api_key=key)
 
+# Function to interact with the chatbot
 def chat(message):
     try:
         chat_completion = client.chat.completions.create(
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are a helpful assistant, responding with clarity."},
                 {"role": "user", "content": message},
             ],
-            model="llama3-8b-8192",
-            temperature=0.5,
-            max_tokens=2048,
-            top_p=1,
-            stop=None,
-            stream=False,
+            model="llama3-8b-8192",  # You can switch to a different model if needed
+            temperature=0.7,  # Slightly higher to make responses more dynamic
+            max_tokens=3000,  # Increase token limit for longer, more detailed responses
+            top_p=0.9,  # Adjust for more varied responses
+            stream=False,  # You can change this to True if real-time streaming is available
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
-        return "Sorry, something went wrong: " + str(e)
+        return f"Sorry, something went wrong: {str(e)}"
 
-# Streamlit UI
+# Streamlit UI setup
 st.title("Linguist AI: Your Professional Chatbot")
 
-# Theme selection
+# Theme selection for dynamic customization
 theme = st.selectbox(
     "Select Theme:",
     ["Default", "Gradient", "Solid Color", "Background Image"]
 )
 
-# Set CSS based on selected theme
+# Dynamic theme-based CSS
 if theme == "Gradient":
     st.markdown(
         """
         <style>
         .stApp {
-            background: linear-gradient(135deg, rgb(114, 194, 224), rgb(161, 196, 253));
+            background: linear-gradient(135deg, #72c2e0, #a1c4fd);
             height: 100vh;
             color: black;
         }
@@ -446,7 +444,7 @@ elif theme == "Solid Color":
         """
         <style>
         .stApp {
-            background-color: rgb(240, 240, 240);
+            background-color: #f0f0f0;
             height: 100vh;
             color: black;
         }
@@ -483,41 +481,37 @@ else:  # Default theme
         </style>
         """, unsafe_allow_html=True)
 
-# Initialize chat history
+# Initialize chat history to retain past conversations
 if 'history' not in st.session_state:
     st.session_state.history = []
 
-# Custom CSS for chat layout
+# Custom CSS for layout improvements
 st.markdown(
     """
     <style>
     .chat-container {
-        max-height: 80vh;  /* Adjust the height to make space for input */
-        overflow-y: auto;   /* Enable vertical scrolling */
-        margin-bottom: 10px;  /* Space between chat and input */
+        max-height: 80vh;
+        overflow-y: auto;
+        margin-bottom: 20px;
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
     .user-message {
         background-color: #E1FFC7;
-        text-align: right;
         padding: 10px;
-        border-radius: 15px;
-        margin: 10px 0 10px 10px;
-        display: inline-block;
-        max-width: 60%;
-        float: right;  /* Align user messages to the right */
+        border-radius: 10px;
+        margin: 5px;
+        max-width: 75%;
+        float: right;
         color: black;
     }
     .bot-message {
         background-color: #D1E7FF;
-        text-align: left;
         padding: 10px;
-        border-radius: 15px;
-        margin: 10px 10px 10px 0;
-        display: inline-block;
-        max-width: 60%;
-        float: left;  /* Align bot messages to the left */
+        border-radius: 10px;
+        margin: 5px;
+        max-width: 75%;
+        float: left;
         color: black;
     }
     .clearfix::after {
@@ -526,60 +520,44 @@ st.markdown(
         display: table;
     }
     .input-container {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        padding: 10px;
         position: fixed;
-        bottom: 10px;
+        bottom: 0;
         left: 0;
-        z-index: 1;
+        width: 100%;
+        padding: 10px;
         background-color: white;
-    }
-    .stTextInput {
-        flex-grow: 1;
-        margin-right: 10px;
-    }
-    .stButton button {
-        background-color: #008CBA;
-        color: white;
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-    }
-    .stButton button:hover {
-        background-color: #00688B;
+        z-index: 9999;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# Create a form for user input at the bottom of the page
+# Create form for user input at the bottom of the chat
 with st.form(key='chat_form', clear_on_submit=True):
     st.markdown('<div class="input-container">', unsafe_allow_html=True)
-    user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
+    user_input = st.text_input("Type your message here...", label_visibility="collapsed")
     submit_button = st.form_submit_button("Send")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Simulate typing indicator
+# Simulate typing indicator if the submit button is pressed
 if submit_button and user_input:
     with st.spinner("Linguist AI is typing..."):
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
 
-# Display chat history in a scrollable container
+# Display chat history in reverse chronological order
 with st.container():
     st.markdown('<div class="chat-container">', unsafe_allow_html=True)
-    for chat in st.session_state.history:
-        # User input style (right side now)
+    for chat in reversed(st.session_state.history):
+        # User message
         st.markdown(
             f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
             unsafe_allow_html=True)
-        
-        # Bot response style (left side now)
+
+        # Bot message
         st.markdown(
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
 
 
