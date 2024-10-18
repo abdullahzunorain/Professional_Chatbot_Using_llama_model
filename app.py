@@ -69,8 +69,8 @@ client = Groq(api_key=key)
 
 # Define chat function
 def chat(message, temperature, max_tokens):
-    if message is None or message.strip() == "":
-        return "Please enter a valid message."
+    if not message or not temperature or not max_tokens:
+        return "Invalid input. Please check your message and settings."
 
     try:
         chat_completion = client.chat.completions.create(
@@ -87,9 +87,9 @@ def chat(message, temperature, max_tokens):
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
-        # Log the error message
         print(f"Error occurred: {str(e)}")
         return "Sorry, something went wrong: " + str(e)
+
 
 
 
