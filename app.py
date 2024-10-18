@@ -483,8 +483,9 @@ st.markdown(
     <style>
     .chat-container {
         max-height: 80vh;  /* Adjust the height to make space for input at bottom */
-        overflow-y: auto;  /* Enable vertical scrolling */
+        overflow-y: auto;   /* Enable vertical scrolling */
         margin-bottom: 10px;  /* Space between chat and input */
+        position: relative;  /* Set relative positioning for chat container */
     }
     .user-message {
         background-color: #E1FFC7;
@@ -515,36 +516,36 @@ st.markdown(
     }
     /* Fixed position for input box and button at the bottom center */
     .input-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 10px;
+        position: fixed;  /* Make input area fixed */
+        bottom: 20px;  /* Distance from bottom of viewport */
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1;
-        background-color: #fff;
-        border-top: 1px solid #ccc;
+        width: 60%;
+        z-index: 1;  /* Ensure it stays on top */
+        background-color: #fff;  /* Background color */
+        padding: 10px;  /* Padding for input container */
+        border-radius: 10px;  /* Rounded corners */
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);  /* Shadow for depth */
     }
     .stTextInput {
         flex-grow: 1;
-        margin-right: 10px;
+        margin-right: 10px;  /* Space between input and button */
     }
     .stButton button {
-        background-color: #008CBA;
-        color: white;
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
+        background-color: #008CBA;  /* Button color */
+        color: white;  /* Button text color */
+        padding: 10px 20px;  /* Button padding */
+        font-size: 16px;  /* Button font size */
+        border: none;  /* No border */
+        cursor: pointer;  /* Pointer cursor on hover */
     }
     .stButton button:hover {
-        background-color: #00688B;
+        background-color: #00688B;  /* Darker shade on hover */
     }
     </style>
-    """, unsafe_allow_html=True
-)
+    """, unsafe_allow_html=True)
+
 
 # Create a form for user input at the bottom center
 with st.form(key='chat_form', clear_on_submit=True):
