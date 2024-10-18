@@ -382,7 +382,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -485,7 +484,6 @@ st.markdown(
         max-height: 80vh;  /* Adjust the height to make space for input at bottom */
         overflow-y: auto;   /* Enable vertical scrolling */
         margin-bottom: 10px;  /* Space between chat and input */
-        position: relative;
     }
     .user-message {
         background-color: #E1FFC7;
@@ -573,20 +571,3 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
-# Keep the input box fixed and separate from chat history
-st.markdown(
-    """
-    <style>
-    .input-container {
-        position: fixed;
-        bottom: 20px;  /* Position input box 20px from the bottom */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
-        z-index: 999;  /* Ensure it stays on top of chat history */
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-
