@@ -51,8 +51,6 @@
 
 
 
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -90,7 +88,8 @@ st.markdown(
         background: linear-gradient(135deg, #72c2e0, #a1c4fd);
         animation: backgroundAnimation 10s infinite alternate;
         height: 100vh;
-        color: white; /* Adjust text color for better visibility */
+        color: black; /* Ensure text is black for better visibility */
+        font-family: Arial, sans-serif; /* Add a readable font */
     }
 
     @keyframes backgroundAnimation {
@@ -99,7 +98,7 @@ st.markdown(
     }
 
     .chat-container {
-        background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+        background-color: #FFFFFF; /* Solid white background for chat */
         border-radius: 15px;
         padding: 20px;
         max-width: 800px; /* Set a max width for the chat area */
@@ -116,6 +115,7 @@ st.markdown(
         border-radius: 15px;
         border: 1px solid #72c2e0;
         padding: 10px;
+        font-size: 16px; /* Increase input text size */
     }
     </style>
     """,
@@ -145,5 +145,3 @@ with st.container():
             f"<div class='chat-container'><div class='stChatMessage' style='background-color: #D1E7FF; margin: 5px 0;'>{chat['bot']}</div></div>",
             unsafe_allow_html=True
         )
-
-
