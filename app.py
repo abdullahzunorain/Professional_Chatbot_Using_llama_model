@@ -49,7 +49,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -79,12 +78,12 @@ def chat(message):
 # Streamlit UI
 st.title("Linguist AI: Your Professional Chatbot")
 
-# Set the gradient background style
+# Set the RGB gradient background style
 st.markdown(
     """
     <style>
     .stApp {
-        background: linear-gradient(135deg, #72c2e0, #a1c4fd); /* Gradient background */
+        background: linear-gradient(135deg, rgb(114, 194, 224), rgb(161, 196, 253)); /* Gradient background using RGB */
         height: 100vh;
         color: black; /* Text color */
         font-family: Arial, sans-serif; /* Readable font */
@@ -106,7 +105,7 @@ st.markdown(
 
     input {
         border-radius: 15px;
-        border: 1px solid #72c2e0;
+        border: 1px solid rgb(114, 194, 224);
         padding: 10px;
         font-size: 16px; /* Increased input text size */
     }
