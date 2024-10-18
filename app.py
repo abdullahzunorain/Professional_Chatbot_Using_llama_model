@@ -59,6 +59,10 @@ from groq import Groq
 key = os.getenv("GROQ_API")
 client = Groq(api_key=key)
 
+# Set page configuration
+st.set_page_config(page_title="Linguist AI", page_icon="🤖", layout="wide")  # Must be first
+
+
 def chat(message):
     try:
         chat_completion = client.chat.completions.create(
