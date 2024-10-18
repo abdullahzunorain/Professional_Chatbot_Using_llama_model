@@ -51,7 +51,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -63,16 +62,17 @@ st.set_page_config(page_title="Linguist AI", page_icon="🤖", layout="wide")
 key = os.getenv("GROQ_API")
 client = Groq(api_key=key)
 
+# Define chat function
 def chat(message):
     try:
         chat_completion = client.chat.completions.create(
             messages=[
-                {"role": "system", "content": "you are a helpful assistant."},
+                {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": message},
             ],
             model="llama3-8b-8192",
             temperature=0.5,
-            max_tokens=512,  # Increased token limit for detailed responses
+            max_tokens=512,
             top_p=1,
             stop=None,
             stream=False,
@@ -81,77 +81,144 @@ def chat(message):
     except Exception as e:
         return "Sorry, something went wrong: " + str(e)
 
-# Background styling
+# HTML and CSS for custom styling
 st.markdown(
     """
     <style>
-        .reportview-container {
-            background-image: url('https://your-image-url.com/background.jpg'); /* Replace with your background image URL */
-            background-size: cover;
-            background-position: center;
-            color: #FFFFFF; /* Text color */
+        body {
+            background-color: #f7f7f9;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
         }
-
-        .stChatMessage {
-            border-radius: 20px;
-            padding: 15px;
-            margin: 10px 0;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        .header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
         }
-
-        .user {
-            background-color: #E6FFC7; /* Light green for user messages */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 70vh;
+            overflow-y: auto;
+            border: 1px solid #d3d3d3;
+            border-radius: 10px;
+            background-color: #fff;
+            padding: 10px;
+            margin: 20px 0;
         }
-
-        .bot {
-            background-color: #D1E7FF; /* Light blue for bot messages */
-        }
-
-        .stTextInput {
+        .user-message {
+            background-color: #E1FFC7;
             border-radius: 15px;
             padding: 10px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+            margin: 5px 0;
+            align-self: flex-end;
+            max-width: 80%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
-        /* Additional styles for a more attractive interface */
-        .st-container {
-            max-width: 800px;
-            margin: 0 auto;
+        .bot-message {
+            background-color: #D1E7FF;
+            border-radius: 15px;
+            padding: 10px;
+            margin: 5px 0;
+            align-self: flex-start;
+            max-width: 80%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
-        h1 {
-            color: #333333;
-            font-family: Arial, sans-serif;
+        .input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+        .stTextInput {
+            flex-grow: 1;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+            margin-right: 10px;
+        }
+        .send-button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .send-button:hover {
+            background-color: #357ab8;
+        }
+        footer {
             text-align: center;
-        }
-
-        p {
-            color: #666666;
-            font-size: 18px;
-            line-height: 1.5;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
+# Header section
+st.markdown("<div class='header'><h1>Linguist AI 🤖</h1></div>", unsafe_allow_html=True)
+
+# Initialize chat history
 if 'history' not in st.session_state:
     st.session_state.history = []
 
-# Create a form for user input
-with st.form(key='chat_form', clear_on_submit=True):
-    user_input = st.text_input("You:", placeholder="Type your message here...", key='user_input')
-    submit_button = st.form_submit_button("Send")
+# Chat container
+st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
 
+# Display chat history
+for chat in st.session_state.history:
+    st.markdown(f"<div class='user-message'>{chat['user']}</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='bot-message'>{chat['bot']}</div>", unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+# User input form
+with st.form(key='chat_form', clear_on_submit=True):
+    user_input = st.text_input("Type your message here...", key='user_input', placeholder="Type your message here...")
+    submit_button = st.form_submit_button("Send", help="Click to send your message", type='primary')
+
+# Handle user input
 if submit_button and user_input:
     response = chat(user_input)
     st.session_state.history.append({"user": user_input, "bot": response})
 
-# Display chat history
-for chat in st.session_state.history:
-    st.markdown(f"<div class='stChatMessage user'>{chat['user']}</div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='stChatMessage bot'>{chat['bot']}</div>", unsafe_allow_html=True)
-
 # Add a footer
-st.markdown("---")
-st.markdown("### Need help? Just ask me!")
+st.markdown("<footer>Need help? Just ask me!</footer>", unsafe_allow_html=True)
+
+# Additional Features
+st.sidebar.header("Settings")
+st.sidebar.subheader("Customize Chatbot")
+temperature = st.sidebar.slider("Response Creativity (Temperature)", 0.0, 1.0, 0.5, 0.1)
+max_tokens = st.sidebar.slider("Max Tokens", 50, 1000, 512, 50)
+
+# Update model parameters based on user input
+if submit_button and user_input:
+    response = client.chat.completions.create(
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": user_input},
+        ],
+        model="llama3-8b-8192",
+        temperature=temperature,
+        max_tokens=max_tokens,
+        top_p=1,
+        stop=None,
+        stream=False,
+    ).choices[0].message.content
+
+    st.session_state.history.append({"user": user_input, "bot": response})
+
+# Final enhancements
+st.markdown("""
+    <div style='text-align:center; margin-top: 20px;'>
+        <p style='font-size: 12px; color: #888;'>Built with ❤️ by your friendly chatbot</p>
+    </div>
+""", unsafe_allow_html=True)
