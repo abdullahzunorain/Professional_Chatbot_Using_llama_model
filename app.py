@@ -248,7 +248,7 @@ elif theme == "Background Image":
         """
         <style>
         .stApp {
-            background-image: url('https://raw.githubusercontent.com/abdullahzunorain/chatbot/main/lion.jpeg'); /* Use the raw URL */
+            background-image: url('https://raw.githubusercontent.com/abdullahzunorain/chatbot/main/pexels-broderick-armbrister-1186919-6462662.jpg'); /* Use the raw URL */
             background-size: cover;
             background-position: center;
             height: 100vh;
