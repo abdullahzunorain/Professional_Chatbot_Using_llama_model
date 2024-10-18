@@ -52,8 +52,6 @@
 
 
 
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -86,12 +84,14 @@ st.title("Linguist AI: Your Professional Chatbot")
 # Create two columns for images
 col1, col2 = st.columns(2)
 
-# Add images to the columns
+# Add images to the columns with a fixed size
+image_size = 250  # Set your desired fixed width for the images
+
 with col1:
-    st.image("lion.jpeg", caption="Dragon", use_column_width=True)  # Replace with your dragon image path or URL
+    st.image("lion.jpeg", caption="Dragon", width=image_size)  # Replace with your dragon image path or URL
 
 with col2:
-    st.image("Glows.jpeg", caption="Other Animal", use_column_width=True)  # Replace with your other animal image URL
+    st.image("Glows.jpeg", caption="Other Animal", width=image_size)  # Replace with your other animal image URL
 
 st.markdown("<style> .stChatMessage {border-radius: 15px; padding: 10px;} </style>", unsafe_allow_html=True)
 
