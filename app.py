@@ -539,7 +539,7 @@ with st.container():
 with st.container():
     st.markdown('<div class="input-container">', unsafe_allow_html=True)  # Start the input container
     with st.form(key='chat_form', clear_on_submit=True):
-        user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
+        user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed", key="user_input")  # Added a unique key
         submit_button = st.form_submit_button("Send")  # Submit button added here
     st.markdown('</div>', unsafe_allow_html=True)  # End the input container
 
@@ -548,3 +548,4 @@ if submit_button and user_input:  # Check if the button was clicked
     with st.spinner("Linguist AI is typing..."):
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
+
