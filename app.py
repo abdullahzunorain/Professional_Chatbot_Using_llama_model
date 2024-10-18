@@ -3,7 +3,7 @@ import os
 from groq import Groq
 
 # Set up Groq API client
-key = os.getenv("groq")
+key = os.getenv("GROQ_API")
 client = Groq(api_key=key)
 
 def chat(message):
