@@ -52,13 +52,12 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
 
 # Set page configuration (must be the first command)
-st.set_page_config(page_title="Linguist AI", page_icon="🤖", layout="wide")  # Custom page title and icon
+st.set_page_config(page_title="Linguist AI", page_icon="🤖", layout="wide")
 
 # Set up Groq API client
 key = os.getenv("GROQ_API")
@@ -87,24 +86,49 @@ st.markdown(
     """
     <style>
         .reportview-container {
-            background: url('https://your-image-url.com/background.jpg') no-repeat center center fixed;  /* Replace with your background image URL */
+            background-image: url('https://your-image-url.com/background.jpg'); /* Replace with your background image URL */
             background-size: cover;
-            color: #FFFFFF;  /* Text color */
+            background-position: center;
+            color: #FFFFFF; /* Text color */
         }
+
         .stChatMessage {
-            border-radius: 15px;
-            padding: 10px;
-            margin: 5px 0;
+            border-radius: 20px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
         }
+
         .user {
-            background-color: #E1FFC7; /* Light green for user messages */
+            background-color: #E6FFC7; /* Light green for user messages */
         }
+
         .bot {
             background-color: #D1E7FF; /* Light blue for bot messages */
         }
+
         .stTextInput {
-            background-color: #F0F0F0;  /* Light gray for input box */
-            border-radius: 10px;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Additional styles for a more attractive interface */
+        .st-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        p {
+            color: #666666;
+            font-size: 18px;
+            line-height: 1.5;
         }
     </style>
     """,
