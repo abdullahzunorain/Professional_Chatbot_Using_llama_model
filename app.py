@@ -86,7 +86,7 @@ st.title("Linguist AI: Your Professional Chatbot")
 
 # Sidebar for images
 st.sidebar.title("Animals")
-st.sidebar.image("https://example.com/dragon_image.jpg", caption="Dragon", use_column_width=True)  # Replace with your dragon image URL
+st.sidebar.image("lion.jpeg", caption="Dragon", use_column_width=True)  # Replace with your dragon image URL
 st.sidebar.image("https://example.com/animal_image.jpg", caption="Other Animal", use_column_width=True)  # Replace with your other animal image URL
 
 st.markdown("<style> .stChatMessage {border-radius: 15px; padding: 10px;} </style>", unsafe_allow_html=True)
