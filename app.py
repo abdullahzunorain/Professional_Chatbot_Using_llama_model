@@ -377,8 +377,6 @@
 
 
 
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -396,12 +394,12 @@ def chat(message):
             ],
             model="llama3-8b-8192",
             temperature=0.5,
-            max_tokens=512,
+            max_tokens=2048,  # Set a higher max_tokens limit
             top_p=1,
             stop=None,
             stream=False,
         )
-        return chat_completion.choices[0].message.content
+        return chat_completion.choices[0].message.content.strip()  # Strip leading/trailing whitespace
     except Exception as e:
         return "Sorry, something went wrong: " + str(e)
 
@@ -425,8 +423,7 @@ if theme == "Gradient":
             color: black;
         }
         </style>
-        """, unsafe_allow_html=True
-    )
+        """, unsafe_allow_html=True)
 
 elif theme == "Solid Color":
     st.markdown(
@@ -438,8 +435,7 @@ elif theme == "Solid Color":
             color: black;
         }
         </style>
-        """, unsafe_allow_html=True
-    )
+        """, unsafe_allow_html=True)
 
 elif theme == "Background Image":
     st.markdown(
@@ -457,8 +453,7 @@ elif theme == "Background Image":
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
         </style>
-        """, unsafe_allow_html=True
-    )
+        """, unsafe_allow_html=True)
 
 else:  # Default theme
     st.markdown(
@@ -470,8 +465,7 @@ else:  # Default theme
             color: black;
         }
         </style>
-        """, unsafe_allow_html=True
-    )
+        """, unsafe_allow_html=True)
 
 # Initialize chat history
 if 'history' not in st.session_state:
@@ -484,8 +478,7 @@ st.markdown(
     .chat-container {
         max-height: 80vh;  /* Adjust the height to make space for input at bottom */
         overflow-y: auto;   /* Enable vertical scrolling */
-        margin-bottom: 10px;  /* Space between chat and input */
-        position: relative;  /* Set relative positioning for chat container */
+        margin-bottom: 100px;  /* Space between chat and input */
     }
     .user-message {
         background-color: #E1FFC7;
@@ -516,36 +509,35 @@ st.markdown(
     }
     /* Fixed position for input box and button at the bottom center */
     .input-container {
-        position: fixed;  /* Make input area fixed */
-        bottom: 20px;  /* Distance from bottom of viewport */
+        position: fixed;
+        bottom: 0;  /* Align to bottom */
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        width: 60%;
-        z-index: 1;  /* Ensure it stays on top */
-        background-color: #fff;  /* Background color */
-        padding: 10px;  /* Padding for input container */
-        border-radius: 10px;  /* Rounded corners */
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);  /* Shadow for depth */
+        width: 60%;  /* Adjust width as needed */
+        z-index: 1;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
     .stTextInput {
         flex-grow: 1;
-        margin-right: 10px;  /* Space between input and button */
+        margin-right: 10px;
     }
     .stButton button {
-        background-color: #008CBA;  /* Button color */
-        color: white;  /* Button text color */
-        padding: 10px 20px;  /* Button padding */
-        font-size: 16px;  /* Button font size */
-        border: none;  /* No border */
-        cursor: pointer;  /* Pointer cursor on hover */
+        background-color: #008CBA;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
     }
     .stButton button:hover {
-        background-color: #00688B;  /* Darker shade on hover */
+        background-color: #00688B;
     }
     </style>
     """, unsafe_allow_html=True)
-
 
 # Create a form for user input at the bottom center
 with st.form(key='chat_form', clear_on_submit=True):
@@ -567,12 +559,11 @@ with st.container():
         # User input style (right side now)
         st.markdown(
             f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
-            unsafe_allow_html=True
-        )
-
+            unsafe_allow_html=True)
+        
         # Bot response style (left side now)
         st.markdown(
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
-            unsafe_allow_html=True
-        )
+            unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
