@@ -379,7 +379,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -517,16 +516,16 @@ st.markdown(
     /* Fixed position for input box and button at the bottom center */
     .input-container {
         position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
         display: flex;
-        width: 60%;
+        justify-content: center;
+        align-items: center;
         z-index: 1;
         background-color: #fff;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid #ccc;
     }
     .stTextInput {
         flex-grow: 1;
