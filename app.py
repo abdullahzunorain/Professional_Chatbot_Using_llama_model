@@ -202,9 +202,6 @@
 
 
 
-
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -334,6 +331,24 @@ st.markdown(
         clear: both;
         display: table;
     }
+    /* Center input box and button */
+    .input-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed; /* Fixed to the bottom */
+        bottom: 20px;  /* Adjust distance from the bottom */
+        left: 50%;  /* Center horizontally */
+        transform: translateX(-50%);  /* Center adjustment */
+        width: 80%;  /* Width of the input container */
+        z-index: 1;  /* Ensure it's above other elements */
+    }
+    .stTextInput {
+        width: 70%;  /* Width of the input box */
+    }
+    .stButton {
+        margin-left: 10px;  /* Space between input and button */
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -362,17 +377,3 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
-# Position the input field statically at the bottom
-st.markdown(
-    """
-    <style>
-    .stTextInput {
-        position: fixed;
-        bottom: 20px;  /* Adjust the distance from the bottom */
-        left: 20px;  /* Adjust the distance from the left */
-        width: 60%;  /* Width of the input box */
-        z-index: 1;  /* Make sure it's above other elements */
-    }
-    </style>
-    """, unsafe_allow_html=True)
