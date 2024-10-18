@@ -63,7 +63,7 @@ key = os.getenv("GROQ_API")
 client = Groq(api_key=key)
 
 # Define chat function
-def chat(message):
+def chat(message, temperature, max_tokens):
     try:
         chat_completion = client.chat.completions.create(
             messages=[
@@ -71,8 +71,8 @@ def chat(message):
                 {"role": "user", "content": message},
             ],
             model="llama3-8b-8192",
-            temperature=0.5,
-            max_tokens=512,
+            temperature=temperature,
+            max_tokens=max_tokens,
             top_p=1,
             stop=None,
             stream=False,
@@ -170,6 +170,24 @@ st.markdown("<div class='header'><h1>Linguist AI 🤖</h1></div>", unsafe_allow_
 if 'history' not in st.session_state:
     st.session_state.history = []
 
+# Initialize parameters in session state
+if 'temperature' not in st.session_state:
+    st.session_state.temperature = 0.5
+if 'max_tokens' not in st.session_state:
+    st.session_state.max_tokens = 512
+
+# Sidebar for settings
+st.sidebar.header("Settings")
+st.sidebar.subheader("Customize Chatbot")
+st.session_state.temperature = st.sidebar.slider(
+    "Response Creativity (Temperature)", 0.0, 1.0, st.session_state.temperature, 0.1,
+    help="Higher values make the output more random."
+)
+st.session_state.max_tokens = st.sidebar.slider(
+    "Max Tokens", 50, 1000, st.session_state.max_tokens, 50,
+    help="Adjust the maximum length of the response."
+)
+
 # Chat container
 st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
 
@@ -187,34 +205,11 @@ with st.form(key='chat_form', clear_on_submit=True):
 
 # Handle user input
 if submit_button and user_input:
-    response = chat(user_input)
+    response = chat(user_input, st.session_state.temperature, st.session_state.max_tokens)
     st.session_state.history.append({"user": user_input, "bot": response})
 
 # Add a footer
 st.markdown("<footer>Need help? Just ask me!</footer>", unsafe_allow_html=True)
-
-# Additional Features
-st.sidebar.header("Settings")
-st.sidebar.subheader("Customize Chatbot")
-temperature = st.sidebar.slider("Response Creativity (Temperature)", 0.0, 1.0, 0.5, 0.1)
-max_tokens = st.sidebar.slider("Max Tokens", 50, 1000, 512, 50)
-
-# Update model parameters based on user input
-if submit_button and user_input:
-    response = client.chat.completions.create(
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": user_input},
-        ],
-        model="llama3-8b-8192",
-        temperature=temperature,
-        max_tokens=max_tokens,
-        top_p=1,
-        stop=None,
-        stream=False,
-    ).choices[0].message.content
-
-    st.session_state.history.append({"user": user_input, "bot": response})
 
 # Final enhancements
 st.markdown("""
