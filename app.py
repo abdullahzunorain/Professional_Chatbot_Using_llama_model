@@ -381,7 +381,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -484,6 +483,8 @@ st.markdown(
         max-height: 80vh;  /* Adjust the height to make space for input at bottom */
         overflow-y: auto;   /* Enable vertical scrolling */
         margin-bottom: 10px;  /* Space between chat and input */
+        padding: 10px; /* Add padding */
+        border-radius: 15px; /* Rounded corners */
     }
     .user-message {
         background-color: #E1FFC7;
@@ -512,19 +513,13 @@ st.markdown(
         clear: both;
         display: table;
     }
-    /* Fixed position for input box and button at the bottom center */
     .input-container {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
         display: flex;
-        width: 60%;
-        z-index: 1;
-        background-color: #fff;
+        align-items: center;
         padding: 10px;
+        background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for better visibility */
         border-radius: 10px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
     .stTextInput {
         flex-grow: 1;
@@ -544,30 +539,36 @@ st.markdown(
     </style>
     """, unsafe_allow_html=True)
 
-# Create a form for user input at the bottom center
-with st.form(key='chat_form', clear_on_submit=True):
-    st.markdown('<div class="input-container">', unsafe_allow_html=True)
-    user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
-    submit_button = st.form_submit_button("Send")
-    st.markdown('</div>', unsafe_allow_html=True)
+# Create a two-column layout for chat history and user input
+col1, col2 = st.columns(2)
 
-# Simulate typing indicator
-if submit_button and user_input:
-    with st.spinner("Linguist AI is typing..."):
-        response = chat(user_input)
-        st.session_state.history.append({"user": user_input, "bot": response})
-
-# Display chat history in a scrollable container
-with st.container():
+# Column for chat history
+with col1:
     st.markdown('<div class="chat-container">', unsafe_allow_html=True)
     for chat in st.session_state.history:
-        # User input style (right side now)
+        # User input style (right side)
         st.markdown(
             f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
             unsafe_allow_html=True)
         
-        # Bot response style (left side now)
+        # Bot response style (left side)
         st.markdown(
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
+# Column for user input
+with col2:
+    # Create a form for user input at the bottom center
+    with st.form(key='chat_form', clear_on_submit=True):
+        st.markdown('<div class="input-container">', unsafe_allow_html=True)
+        user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
+        submit_button = st.form_submit_button("Send")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Simulate typing indicator
+    if submit_button and user_input:
+        with st.spinner("Linguist AI is typing..."):
+            response = chat(user_input)
+            st.session_state.history.append({"user": user_input, "bot": response})
+
