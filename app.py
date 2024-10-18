@@ -56,7 +56,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -91,11 +90,11 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url('Glows.jpeg'); /* Replace with your image URL */
+        background-image: url('Glows.jpeg'); /* Ensure this path is correct */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        height: 100vh;
+        height: 100vh; /* Full height of the viewport */
         color: white; /* Adjust text color for better visibility */
     }
     .chat-container {
