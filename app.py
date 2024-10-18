@@ -393,7 +393,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -562,9 +561,6 @@ with st.form(key='chat_form', clear_on_submit=True):
     submit_button = st.form_submit_button("Send")
     st.markdown('</div>', unsafe_allow_html=True)
 
-
-
-
 # Simulate typing indicator
 if submit_button and user_input:
     with st.spinner("Linguist AI is typing..."):
@@ -586,16 +582,4 @@ with st.container():
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# # Add input box for user to send a message, taking up the bottom space
-# st.markdown(
-#     """
-#     <div class="input-container">
-#         <form action="" method="post">
-#             <input type="text" name="user_input" placeholder="Type your message here..." required>
-#             <button type="submit">Send</button>
-#         </form>
-#     </div>
-#     """,
-#     unsafe_allow_html=True
-# )
 
