@@ -483,7 +483,7 @@ st.markdown(
     .chat-container {
         max-height: 70vh;  /* Adjust the height as necessary */
         overflow-y: auto;   /* Enable vertical scrolling */
-        margin-bottom: 80px;  /* Ensure space between chat and fixed input */
+        margin-bottom: 10px;  /* Ensure space between chat and fixed input */
     }
 
     /* User message style */
