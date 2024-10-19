@@ -15,8 +15,8 @@ def chat(message):  # Define a function for handling chat messages
                 {"role": "user", "content": message},  # User message
             ],
             model="llama3-8b-8192",  # Specify the model to use
-            temperature=0.5,  # Set the randomness of the model's responses
-            max_tokens=2048,  # Set the maximum tokens for the response
+            temperature=0.7,  # Set the randomness of the model's responses
+            max_tokens=5000,  # Set the maximum tokens for the response
             top_p=1,  # Set the top-p sampling for response generation
             stop=None,  # No specific stopping conditions
             stream=False,  # Disable streaming for responses
@@ -186,17 +186,3 @@ st.markdown(  # Apply CSS for positioning the button
     }
     </style>
     """, unsafe_allow_html=True)
-
-st.markdown(  # Apply CSS for positioning the button
-    """
-    <style>
-    .stTitle{
-        position: fixed;  /* Fix position of the button */
-        bottom: 20px;  /* Adjust the distance from the bottom */
-        left: 100%;  /* Center the button horizontally */
-        transform: translateX(-50%);  /* Shift the button to the left by half of its width */
-        z-index: 1;  /* Ensure it's above other elements */
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
