@@ -554,35 +554,6 @@ with st.container():  # Create a container for chat history
 #     """, unsafe_allow_html=True)
 
 
-
-
-# Create a form for user input
-with st.form(key='chat_form', clear_on_submit=True):  # Create a form to collect user input
-    user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")  # Input field for user message
-    # Button is created here but will be styled separately
-    submit_button = st.form_submit_button("Send")  # Button to submit the form
-
-# Simulate typing indicator
-if submit_button and user_input:  # Check if the submit button is pressed and there's user input
-    with st.spinner("Linguist AI is typing..."):  # Show a spinner while waiting for a response
-        response = chat(user_input)  # Call the chat function to get a response
-        st.session_state.history.append({"user": user_input, "bot": response})  # Append the chat history
-
-# Display chat history in a scrollable container
-with st.container():  # Create a container for chat history
-    st.markdown('<div class="chat-container">', unsafe_allow_html=True)  # Start chat container
-    for chat in st.session_state.history:  # Loop through chat history
-        # User input style (right side now)
-        st.markdown(  # Display user message
-            f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
-            unsafe_allow_html=True)
-        
-        # Bot response style (left side now)
-        st.markdown(  # Display bot response
-            f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
-            unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)  # End chat container
-
 # Position the input field statically at the bottom
 st.markdown(  # Apply CSS for positioning the input field
     """
