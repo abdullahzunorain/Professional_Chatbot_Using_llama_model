@@ -380,7 +380,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -482,7 +481,7 @@ st.markdown(
     .chat-container {
         max-height: 70vh;  /* Adjust the height as necessary */
         overflow-y: auto;   /* Enable vertical scrolling */
-        margin-bottom: 10px;  /* Space between chat and input */
+        margin-bottom: 70px;  /* Space to accommodate the input at the bottom */
     }
     .user-message {
         background-color: #E1FFC7;
@@ -511,33 +510,31 @@ st.markdown(
         clear: both;
         display: table;
     }
-    </style>
-    """, unsafe_allow_html=True)
 
-    # # /* Input container fixed at the bottom of the screen */
-    # # .input-container {
-    # #     position: fixed;
-    # #     bottom: 20px;
-    # #     left: 20px;
-    # #     width: calc(100% - 40px);
-    # #     display: flex;
-    # #     z-index: 1;
-    # # }
+    /* Input container fixed at the bottom of the screen */
+    .input-container {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        display: flex;
+        z-index: 1;
+    }
 
-    # /* Input box styling */
-    # .input-box {
-    #     flex-grow: 1;
-    #     margin-right: 10px;
-    # }
+    /* Input box styling */
+    .input-box {
+        flex-grow: 1;
+        margin-right: 10px;
+    }
 
-    # /* Button styling (optional for better appearance) */
-    # .stButton button {
-    #     padding: 8px 16px;
-    #     background-color: #4CAF50;
-    #     color: white;
-    #     border: none;
-    #     border-radius: 4px;
-    # }
+    /* Button styling */
+    .stButton button {
+        padding: 8px 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
