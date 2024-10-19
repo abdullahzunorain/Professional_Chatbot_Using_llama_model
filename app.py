@@ -400,7 +400,7 @@ def chat(message):
             max_tokens=5000,
             top_p=1,
             stop=None,
-            stream=True,
+            stream=False,
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
