@@ -476,63 +476,63 @@ else:  # Default theme
 if 'history' not in st.session_state:
     st.session_state.history = []
 
-# Custom CSS for chat layout
-st.markdown(
-    """
-    <style>
-    .chat-container {
-        max-height: 70vh;  /* Adjust the height as necessary */
-        overflow-y: auto;   /* Enable vertical scrolling */
-        margin-bottom: 10px;  /* Space between chat and input */
-    }
-    .user-message {
-        background-color: #E1FFC7;
-        text-align: right;
-        padding: 10px;
-        border-radius: 15px;
-        margin: 10px 0 10px 10px;
-        display: inline-block;
-        max-width: 60%;
-        float: right;  /* Align user messages to the right */
-        color: black;
-    }
-    .bot-message {
-        background-color: #D1E7FF;
-        text-align: left;
-        padding: 10px;
-        border-radius: 15px;
-        margin: 10px 10px 10px 0;
-        display: inline-block;
-        max-width: 60%;
-        float: left;  /* Align bot messages to the left */
-        color: black;
-    }
-    .clearfix::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-    .input-container {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 60%;
-        display: flex;
-        z-index: 1;
-    }
-    .input-box {
-        flex-grow: 1;
-        margin-right: 10px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+# # Custom CSS for chat layout
+# st.markdown(
+#     """
+#     <style>
+#     .chat-container {
+#         max-height: 70vh;  /* Adjust the height as necessary */
+#         overflow-y: auto;   /* Enable vertical scrolling */
+#         margin-bottom: 10px;  /* Space between chat and input */
+#     }
+#     .user-message {
+#         background-color: #E1FFC7;
+#         text-align: right;
+#         padding: 10px;
+#         border-radius: 15px;
+#         margin: 10px 0 10px 10px;
+#         display: inline-block;
+#         max-width: 60%;
+#         float: right;  /* Align user messages to the right */
+#         color: black;
+#     }
+#     .bot-message {
+#         background-color: #D1E7FF;
+#         text-align: left;
+#         padding: 10px;
+#         border-radius: 15px;
+#         margin: 10px 10px 10px 0;
+#         display: inline-block;
+#         max-width: 60%;
+#         float: left;  /* Align bot messages to the left */
+#         color: black;
+#     }
+#     .clearfix::after {
+#         content: "";
+#         clear: both;
+#         display: table;
+#     }
+#     .input-container {
+#         position: fixed;
+#         bottom: 20px;
+#         left: 20px;
+#         width: 60%;
+#         display: flex;
+#         z-index: 1;
+#     }
+#     .input-box {
+#         flex-grow: 1;
+#         margin-right: 10px;
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
 
-# # Create a form for user input
-# with st.form(key='chat_form', clear_on_submit=True):
-#     st.markdown('<div class="input-container">', unsafe_allow_html=True)
-#     user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed", key="input-box")
-#     submit_button = st.form_submit_button("Send")
-#     st.markdown('</div>', unsafe_allow_html=True)
+# Create a form for user input
+with st.form(key='chat_form', clear_on_submit=True):
+    st.markdown('<div class="input-container">', unsafe_allow_html=True)
+    user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed", key="input-box")
+    submit_button = st.form_submit_button("Send")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Simulate typing indicator
 if submit_button and user_input:
