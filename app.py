@@ -539,24 +539,16 @@ with st.container():  # Create a container for chat history
 #     </style>
 #     """, unsafe_allow_html=True)
 
-
-
-# Position the input field and button statically at the bottom
-st.markdown(  # Apply CSS for positioning
+# Position the submit button at the bottom center
+st.markdown(  # Apply CSS for positioning the button
     """
     <style>
-    .chat-input-container {
-        position: fixed;  /* Fix position of the container */
+    .stButton {
+        position: fixed;  /* Fix position of the button */
         bottom: 20px;  /* Adjust the distance from the bottom */
-        left: 50%;  /* Center the container horizontally */
-        transform: translateX(-50%);  /* Shift the container to the left by half of its width */
-        width: 60%;  /* Width of the container */
+        left: 50%;  /* Center the button horizontally */
+        transform: translateX(-50%);  /* Shift the button to the left by half of its width */
         z-index: 1;  /* Ensure it's above other elements */
-        display: flex;  /* Use flexbox for layout */
-        justify-content: space-between;  /* Space between input and button */
-    }
-    .stTextInput, .stButton {  /* Style for both text input and button */
-        width: 60%;  /* Width of both elements */
     }
     </style>
     """, unsafe_allow_html=True)
