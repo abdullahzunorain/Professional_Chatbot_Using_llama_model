@@ -177,8 +177,6 @@
 
 
 
-
-
 import streamlit as st
 import os
 from groq import Groq
@@ -196,7 +194,7 @@ def chat(message):
             ],
             model="llama3-8b-8192",
             temperature=0.5,
-            max_tokens=512,
+            max_tokens=2048,
             top_p=1,
             stop=None,
             stream=False,
@@ -278,7 +276,7 @@ st.markdown(
     """
     <style>
     .chat-container {
-        max-height: 80vh;  /* Adjust the height to make space for input at bottom */
+        max-height: 70vh;  /* Adjust the height as necessary */
         overflow-y: auto;   /* Enable vertical scrolling */
         margin-bottom: 10px;  /* Space between chat and input */
     }
@@ -309,44 +307,13 @@ st.markdown(
         clear: both;
         display: table;
     }
-    /* Fixed position for input box and button at the bottom center */
-    .input-container {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        width: 60%;
-        z-index: 1;
-        background-color: #fff;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .stTextInput {
-        flex-grow: 1;
-        margin-right: 10px;
-    }
-    .stButton button {
-        background-color: #008CBA;
-        color: white;
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-    }
-    .stButton button:hover {
-        background-color: #00688B;
-    }
     </style>
     """, unsafe_allow_html=True)
 
-# Create a form for user input at the bottom center
+# Create a form for user input
 with st.form(key='chat_form', clear_on_submit=True):
-    st.markdown('<div class="input-container">', unsafe_allow_html=True)
     user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
     submit_button = st.form_submit_button("Send")
-    st.markdown('</div>', unsafe_allow_html=True)
 
 # Simulate typing indicator
 if submit_button and user_input:
@@ -369,7 +336,6 @@ with st.container():
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-
 # Position the input field statically at the bottom
 st.markdown(
     """
@@ -383,4 +349,3 @@ st.markdown(
     }
     </style>
     """, unsafe_allow_html=True)
-
