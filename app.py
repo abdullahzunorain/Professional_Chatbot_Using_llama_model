@@ -396,11 +396,11 @@ def chat(message):
                 {"role": "user", "content": message},
             ],
             model="llama3-8b-8192",
-            temperature=0.5,
-            max_tokens=2048,
+            temperature=0.8,
+            max_tokens=5000,
             top_p=1,
             stop=None,
-            stream=False,
+            stream=True,
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
