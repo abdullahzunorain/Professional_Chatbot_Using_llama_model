@@ -267,7 +267,7 @@ elif theme == "Background Image":  # If the selected theme is Background Image
             background-size: cover;  /* Cover the entire area */
             background-position: center;  /* Center the image */
             height: 100vh;  /* Full viewport height */
-            color: white;  /* Text color */
+            color: black;  /* Text color */
         }
         .stTitle {
             color: #FFFFFF !important;  /* Title color */
