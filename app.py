@@ -519,15 +519,15 @@ st.markdown(
         display: table;
     }
 
-    /* Input container fixed at the bottom of the screen */
-    .input-container {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: calc(100% - 40px);
-        display: flex;
-        z-index: 1;
-    }
+    # /* Input container fixed at the bottom of the screen */
+    # .input-container {
+    #     position: fixed;
+    #     bottom: 20px;
+    #     left: 20px;
+    #     width: calc(100% - 40px);
+    #     display: flex;
+    #     z-index: 1;
+    # }
 
     /* Input box styling */
     .input-box {
