@@ -372,8 +372,8 @@ st.markdown(  # Apply CSS for positioning the input field
     </style>
     """, unsafe_allow_html=True)
 
-# Position the submit button at the bottom center
-st.markdown(  # Apply CSS for positioning the button
+
+st.markdown(
     """
     <style>
     .stSpinner {
@@ -382,7 +382,4 @@ st.markdown(  # Apply CSS for positioning the button
         left: 80%;  /* Center the button horizontally */
     }
     </style>
-    """, unsafe_allow_html=True)
-
-
     """, unsafe_allow_html=True)
