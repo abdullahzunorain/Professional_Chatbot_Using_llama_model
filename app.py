@@ -543,7 +543,7 @@ with st.container():  # Create a container for chat history
 st.markdown(  # Apply CSS for positioning the button
     """
     <style>
-    .stButton {
+    .stFormSubmitButton {
         position: fixed;  /* Fix position of the button */
         bottom: 20px;  /* Adjust the distance from the bottom */
         left: 50%;  /* Center the button horizontally */
