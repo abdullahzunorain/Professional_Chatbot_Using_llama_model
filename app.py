@@ -479,9 +479,9 @@ st.markdown(
     """
     <style>
     .chat-container {
-        max-height: 70vh;  /* Adjust the height as necessary */
+        max-height: 10vh;  /* Adjust the height as necessary */
         overflow-y: auto;   /* Enable vertical scrolling */
-        margin-bottom: 70px;  /* Space to accommodate the input at the bottom */
+        margin-bottom: 10px;  /* Space to accommodate the input at the bottom */
     }
     .user-message {
         background-color: #E1FFC7;
