@@ -378,7 +378,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -455,10 +454,9 @@ st.markdown(
     """
     <style>
     .chat-container {
-        max-height: 80vh;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column-reverse;
+        max-height: 70vh; /* Define the maximum height for the chat area */
+        overflow-y: auto; /* Allow vertical scrolling */
+        margin-bottom: 100px; /* Make space for the fixed input area */
     }
     .user-message, .bot-message {
         padding: 10px;
@@ -503,7 +501,7 @@ if submit_button and user_input:
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
 
-# Display chat history
+# Display chat history (scrollable)
 with st.container():
     st.markdown('<div class="chat-container">', unsafe_allow_html=True)
     for chat in st.session_state.history:
@@ -514,3 +512,4 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
