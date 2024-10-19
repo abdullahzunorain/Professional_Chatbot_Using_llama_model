@@ -297,7 +297,7 @@ st.markdown(  # Apply custom CSS for chat layout
     """
     <style>
     .chat-container {
-        max-height: 80vh;  /* Maximum height for chat container */
+        max-height: 10vh;  /* Maximum height for chat container */
         overflow-y: auto;   /* Enable vertical scrolling */
         margin-top: 10px;  /* Space between the title and chat area */
     }
