@@ -524,17 +524,79 @@ with st.container():  # Create a container for chat history
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)  # End chat container
 
+# # Position the input field statically at the bottom
+# st.markdown(  # Apply CSS for positioning the input field
+#     """
+#     <style>
+#     .stTextInput {
+#         position: fixed;  /* Fix position of the input box */
+#         bottom: 20px;  /* Adjust the distance from the bottom */
+#         left: 50%;  /* Center the input box horizontally */
+#         transform: translateX(-50%);  /* Shift the input box to the left by half of its width */
+#         width: 60%;  /* Width of the input box */
+#         z-index: 1;  /* Ensure it's above other elements */
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
+
+# # Position the submit button at the bottom center
+# st.markdown(  # Apply CSS for positioning the button
+#     """
+#     <style>
+#     .stFormSubmitButton {
+#         position: fixed;  /* Fix position of the button */
+#         bottom: 20px;  /* Adjust the distance from the bottom */
+#         right: 90%;  /* Center the button horizontally */
+#         transform: translateX(-50%);  /* Shift the button to the left by half of its width */
+#         z-index: 1;  /* Ensure it's above other elements */
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
+
+
+
+
+# Create a form for user input
+with st.form(key='chat_form', clear_on_submit=True):  # Create a form to collect user input
+    user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")  # Input field for user message
+    # Button is created here but will be styled separately
+    submit_button = st.form_submit_button("Send")  # Button to submit the form
+
+# Simulate typing indicator
+if submit_button and user_input:  # Check if the submit button is pressed and there's user input
+    with st.spinner("Linguist AI is typing..."):  # Show a spinner while waiting for a response
+        response = chat(user_input)  # Call the chat function to get a response
+        st.session_state.history.append({"user": user_input, "bot": response})  # Append the chat history
+
+# Display chat history in a scrollable container
+with st.container():  # Create a container for chat history
+    st.markdown('<div class="chat-container">', unsafe_allow_html=True)  # Start chat container
+    for chat in st.session_state.history:  # Loop through chat history
+        # User input style (right side now)
+        st.markdown(  # Display user message
+            f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
+            unsafe_allow_html=True)
+        
+        # Bot response style (left side now)
+        st.markdown(  # Display bot response
+            f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
+            unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)  # End chat container
+
 # Position the input field statically at the bottom
 st.markdown(  # Apply CSS for positioning the input field
     """
     <style>
     .stTextInput {
         position: fixed;  /* Fix position of the input box */
-        bottom: 20px;  /* Adjust the distance from the bottom */
+        bottom: 75px;  /* Adjust the distance from the bottom */
         left: 50%;  /* Center the input box horizontally */
         transform: translateX(-50%);  /* Shift the input box to the left by half of its width */
         width: 60%;  /* Width of the input box */
         z-index: 1;  /* Ensure it's above other elements */
+        padding: 10px;  /* Add padding for better UX */
+        border-radius: 20px;  /* Make the input box rounded */
+        border: 1px solid #ccc;  /* Add a border */
     }
     </style>
     """, unsafe_allow_html=True)
@@ -543,12 +605,26 @@ st.markdown(  # Apply CSS for positioning the input field
 st.markdown(  # Apply CSS for positioning the button
     """
     <style>
-    .stFormSubmitButton {
+    .stButton {
         position: fixed;  /* Fix position of the button */
         bottom: 20px;  /* Adjust the distance from the bottom */
-        right: 90%;  /* Center the button horizontally */
+        left: 50%;  /* Center the button horizontally */
         transform: translateX(-50%);  /* Shift the button to the left by half of its width */
         z-index: 1;  /* Ensure it's above other elements */
+        padding: 10px 20px;  /* Add padding for better UX */
+        border-radius: 20px;  /* Make the button rounded */
+        background-color: #4CAF50;  /* Button color */
+        color: white;  /* Text color */
+        border: none;  /* Remove default border */
+        cursor: pointer;  /* Cursor change on hover */
+    }
+    .stButton:hover {
+        background-color: #45a049;  /* Darken the button on hover */
     }
     </style>
     """, unsafe_allow_html=True)
+
+# Create a form for the button to submit the message
+with st.form(key='submit_form'):
+    # Place the button in the form
+    st.form_submit_button("Send")  # Button to submit the form
