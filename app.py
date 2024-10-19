@@ -364,7 +364,7 @@ st.markdown(  # Apply CSS for positioning the input field
     .stTextInput {
         position: fixed;  /* Fix position of the input box */
         bottom: 20px;  /* Adjust the distance from the bottom */
-        left: 50%;  /* Center the input box horizontally */
+        left: 40%;  /* Center the input box horizontally */
         transform: translateX(-50%);  /* Shift the input box to the left by half of its width */
         width: 60%;  /* Width of the input box */
         z-index: 1;  /* Ensure it's above other elements */
@@ -379,7 +379,7 @@ st.markdown(  # Apply CSS for positioning the button
     .stFormSubmitButton {
         position: fixed;  /* Fix position of the button */
         bottom: 20px;  /* Adjust the distance from the bottom */
-        left: 100%;  /* Center the button horizontally */
+        left: 90%;  /* Center the button horizontally */
     }
     </style>
     """, unsafe_allow_html=True)  # This line closes the previous CSS string properly
