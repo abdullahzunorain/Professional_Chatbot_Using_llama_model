@@ -376,10 +376,13 @@ st.markdown(  # Apply CSS for positioning the input field
 st.markdown(  # Apply CSS for positioning the button
     """
     <style>
-    .stFormSubmitButton {
+    .stSpinner {
         position: fixed;  /* Fix position of the button */
         bottom: 20px;  /* Adjust the distance from the bottom */
         left: 80%;  /* Center the button horizontally */
     }
     </style>
-    """, unsafe_allow_html=True)  # This line closes the previous CSS string properly
+    """, unsafe_allow_html=True)
+
+
+    """, unsafe_allow_html=True)
