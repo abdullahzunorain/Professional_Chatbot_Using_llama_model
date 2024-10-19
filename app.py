@@ -198,7 +198,6 @@
 
 
 
-
 import streamlit as st  # Import Streamlit library for web app development
 import os  # Import os module to access environment variables
 from groq import Groq  # Import Groq for interacting with the Groq API
@@ -381,3 +380,6 @@ st.markdown(  # Apply CSS for positioning the button
         position: fixed;  /* Fix position of the button */
         bottom: 20px;  /* Adjust the distance from the bottom */
         left: 100%;  /* Center the button horizontally */
+    }
+    </style>
+    """, unsafe_allow_html=True)  # This line closes the previous CSS string properly
