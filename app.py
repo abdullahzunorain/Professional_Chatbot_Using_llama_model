@@ -479,9 +479,12 @@ st.markdown(
     """
     <style>
     .chat-container {
-        max-height: 10vh;  /* Adjust the height as necessary */
+        max-height: 60vh;  /* Adjust height based on number of messages */
         overflow-y: auto;   /* Enable vertical scrolling */
         margin-bottom: 10px;  /* Space to accommodate the input at the bottom */
+        border: 1px solid #E1E1E1; /* Border around chat container */
+        border-radius: 10px; /* Rounded corners */
+        padding: 10px; /* Padding inside chat container */
     }
     .user-message {
         background-color: #E1FFC7;
@@ -546,10 +549,12 @@ with st.form(key='chat_form', clear_on_submit=True):
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Simulate typing indicator
-if submit_button and user_input:
+if submit_button and user_input.strip():
     with st.spinner("Linguist AI is typing..."):
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
+elif submit_button:
+    st.warning("Please enter a message.")
 
 # Display chat history in a scrollable container
 with st.container():
@@ -576,6 +581,13 @@ st.markdown(
         left: 20px;  /* Adjust the distance from the left */
         width: 60%;  /* Width of the input box */
         z-index: 1;  /* Make sure it's above other elements */
+        border: 2px solid #4CAF50; /* Green border */
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        transition: border-color 0.3s;
+    }
+    .stTextInput:focus {
+        border-color: #66BB6A; /* Lighter green on focus */
     }
     </style>
     """, unsafe_allow_html=True)
