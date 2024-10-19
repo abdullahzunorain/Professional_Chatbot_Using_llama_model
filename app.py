@@ -379,7 +379,6 @@
 
 
 
-
 import streamlit as st
 import os
 from groq import Groq
@@ -451,7 +450,7 @@ elif theme == "Background Image":
 if 'history' not in st.session_state:
     st.session_state.history = []
 
-# Custom CSS for layout with auto-scroll
+# Custom CSS for chat layout
 st.markdown(
     """
     <style>
@@ -476,13 +475,27 @@ st.markdown(
         background-color: #D1E7FF;
         float: left;
     }
+    
+    /* Make input form sticky at the bottom */
+    .input-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        padding: 10px;
+        z-index: 9999; /* Ensure it stays on top */
+        border-top: 1px solid #ddd;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# Chat input form
+# Chat input form (fixed at the bottom)
 with st.form(key='chat_form', clear_on_submit=True):
+    st.markdown('<div class="input-container">', unsafe_allow_html=True)
     user_input = st.text_input("Type your message here...", label_visibility="collapsed")
     submit_button = st.form_submit_button("Send")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Handle user input
 if submit_button and user_input:
