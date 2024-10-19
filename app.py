@@ -546,7 +546,7 @@ st.markdown(  # Apply CSS for positioning the button
     .stFormSubmitButton {
         position: fixed;  /* Fix position of the button */
         bottom: 20px;  /* Adjust the distance from the bottom */
-        right: 10%;  /* Center the button horizontally */
+        right: 90%;  /* Center the button horizontally */
         transform: translateX(-50%);  /* Shift the button to the left by half of its width */
         z-index: 1;  /* Ensure it's above other elements */
     }
