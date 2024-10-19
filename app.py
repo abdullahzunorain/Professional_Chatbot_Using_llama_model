@@ -531,7 +531,7 @@ st.markdown(  # Apply CSS for positioning the input field
     .stTextInput {
         position: fixed;  /* Fix position of the input box */
         bottom: 20px;  /* Adjust the distance from the bottom */
-        centre: 90px;  /* Adjust the distance from the left */
+        centre: 50px;  /* Adjust the distance from the left */
         width: 60%;  /* Width of the input box */
         z-index: 1;  /* Ensure it's above other elements */
     }
