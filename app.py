@@ -297,9 +297,9 @@ st.markdown(  # Apply custom CSS for chat layout
     """
     <style>
     .chat-container {
-        max-height: 70vh;  /* Maximum height for chat container */
+        max-height: 80vh;  /* Maximum height for chat container */
         overflow-y: auto;   /* Enable vertical scrolling */
-        margin-top: 20px;  /* Space between the title and chat area */
+        margin-top: 10px;  /* Space between the title and chat area */
     }
     .user-message {
         background-color: #E1FFC7;  /* User message background color */
@@ -308,7 +308,7 @@ st.markdown(  # Apply custom CSS for chat layout
         border-radius: 15px;  /* Rounded corners for message */
         margin: 10px 0 10px 10px;  /* Margin around message */
         display: inline-block;  /* Make it inline block */
-        max-width: 80%;  /* Maximum width for message */
+        max-width: 90%;  /* Maximum width for message */
         float: right;  /* Align user messages to the right */
         color: black;  /* Text color */
     }
@@ -319,7 +319,7 @@ st.markdown(  # Apply custom CSS for chat layout
         border-radius: 15px;  /* Rounded corners for message */
         margin: 10px 10px 10px 0;  /* Margin around message */
         display: inline-block;  /* Make it inline block */
-        max-width: 80%;  /* Maximum width for message */
+        max-width: 90%;  /* Maximum width for message */
         float: left;  /* Align bot messages to the left */
         color: black;  /* Text color */
     }
