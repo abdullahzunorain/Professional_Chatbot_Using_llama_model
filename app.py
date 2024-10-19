@@ -524,17 +524,39 @@ with st.container():  # Create a container for chat history
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)  # End chat container
 
-# Position the input field statically at the bottom
-st.markdown(  # Apply CSS for positioning the input field
+# # Position the input field statically at the bottom
+# st.markdown(  # Apply CSS for positioning the input field
+#     """
+#     <style>
+#     .stTextInput {
+#         position: fixed;  /* Fix position of the input box */
+#         bottom: 20px;  /* Adjust the distance from the bottom */
+#         left: 50%;  /* Center the input box horizontally */
+#         transform: translateX(-50%);  /* Shift the input box to the left by half of its width */
+#         width: 60%;  /* Width of the input box */
+#         z-index: 1;  /* Ensure it's above other elements */
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
+
+
+
+# Position the input field and button statically at the bottom
+st.markdown(  # Apply CSS for positioning
     """
     <style>
-    .stTextInput {
-        position: fixed;  /* Fix position of the input box */
+    .chat-input-container {
+        position: fixed;  /* Fix position of the container */
         bottom: 20px;  /* Adjust the distance from the bottom */
-        left: 50%;  /* Center the input box horizontally */
-        transform: translateX(-50%);  /* Shift the input box to the left by half of its width */
-        width: 60%;  /* Width of the input box */
+        left: 50%;  /* Center the container horizontally */
+        transform: translateX(-50%);  /* Shift the container to the left by half of its width */
+        width: 60%;  /* Width of the container */
         z-index: 1;  /* Ensure it's above other elements */
+        display: flex;  /* Use flexbox for layout */
+        justify-content: space-between;  /* Space between input and button */
+    }
+    .stTextInput, .stButton {  /* Style for both text input and button */
+        width: 100%;  /* Width of both elements */
     }
     </style>
     """, unsafe_allow_html=True)
