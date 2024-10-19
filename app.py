@@ -378,6 +378,8 @@
 
 
 
+
+
 import streamlit as st
 import os
 from groq import Groq
@@ -454,9 +456,10 @@ st.markdown(
     """
     <style>
     .chat-container {
-        max-height: 70vh; /* Define the maximum height for the chat area */
-        overflow-y: auto; /* Allow vertical scrolling */
-        margin-bottom: 100px; /* Make space for the fixed input area */
+        max-height: 70vh; /* Height of the chat history area */
+        overflow-y: auto; /* Enable vertical scrolling */
+        padding-right: 10px;
+        margin-bottom: 100px; /* Space for fixed input area */
     }
     .user-message, .bot-message {
         padding: 10px;
@@ -468,13 +471,15 @@ st.markdown(
     .user-message {
         background-color: #E1FFC7;
         float: right;
+        clear: both;
     }
     .bot-message {
         background-color: #D1E7FF;
         float: left;
+        clear: both;
     }
-    
-    /* Make input form sticky at the bottom */
+
+    /* Fix input box and button at the bottom */
     .input-container {
         position: fixed;
         bottom: 0;
@@ -482,8 +487,13 @@ st.markdown(
         width: 100%;
         background-color: white;
         padding: 10px;
-        z-index: 9999; /* Ensure it stays on top */
-        border-top: 1px solid #ddd;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    /* Adjusting Send button */
+    .stButton>button {
+        margin-top: 5px;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -512,4 +522,3 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
