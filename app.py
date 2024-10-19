@@ -341,12 +341,12 @@ st.markdown(
     </style>
     """, unsafe_allow_html=True)
 
-# Create a form for user input at the bottom center
-with st.form(key='chat_form', clear_on_submit=True):
-    st.markdown('<div class="input-container">', unsafe_allow_html=True)
-    user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
-    submit_button = st.form_submit_button("Send")
-    st.markdown('</div>', unsafe_allow_html=True)
+# # Create a form for user input at the bottom center
+# with st.form(key='chat_form', clear_on_submit=True):
+#     st.markdown('<div class="input-container">', unsafe_allow_html=True)
+#     user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed")
+#     submit_button = st.form_submit_button("Send")
+#     st.markdown('</div>', unsafe_allow_html=True)
 
 # Simulate typing indicator
 if submit_button and user_input:
@@ -368,3 +368,18 @@ with st.container():
             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
             unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
+# # Position the input field statically at the bottom
+# st.markdown(
+#     """
+#     <style>
+#     .stTextInput {
+#         position: fixed;
+#         bottom: 20px;  /* Adjust the distance from the bottom */
+#         left: 20px;  /* Adjust the distance from the left */
+#         width: 60%;  /* Width of the input box */
+#         z-index: 1;  /* Make sure it's above other elements */
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
+
