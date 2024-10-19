@@ -527,18 +527,18 @@ st.markdown(
     </style>
     """, unsafe_allow_html=True)
 
-# Create a form for user input
-with st.form(key='chat_form', clear_on_submit=True):
-    st.markdown('<div class="input-container">', unsafe_allow_html=True)
-    user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed", key="input-box")
-    submit_button = st.form_submit_button("Send")
-    st.markdown('</div>', unsafe_allow_html=True)
+# # Create a form for user input
+# with st.form(key='chat_form', clear_on_submit=True):
+#     st.markdown('<div class="input-container">', unsafe_allow_html=True)
+#     user_input = st.text_input("You:", placeholder="Type your message here...", label_visibility="collapsed", key="input-box")
+#     submit_button = st.form_submit_button("Send")
+#     st.markdown('</div>', unsafe_allow_html=True)
 
-# # Simulate typing indicator
-# if submit_button and user_input:
-#     with st.spinner("Linguist AI is typing..."):
-#         response = chat(user_input)
-#         st.session_state.history.append({"user": user_input, "bot": response})
+# Simulate typing indicator
+if submit_button and user_input:
+    with st.spinner("Linguist AI is typing..."):
+        response = chat(user_input)
+        st.session_state.history.append({"user": user_input, "bot": response})
 
 # Display chat history in a scrollable container
 with st.container():
