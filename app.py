@@ -308,7 +308,7 @@ st.markdown(  # Apply custom CSS for chat layout
         border-radius: 15px;  /* Rounded corners for message */
         margin: 10px 0 10px 10px;  /* Margin around message */
         display: inline-block;  /* Make it inline block */
-        max-width: 60%;  /* Maximum width for message */
+        max-width: 80%;  /* Maximum width for message */
         float: right;  /* Align user messages to the right */
         color: black;  /* Text color */
     }
@@ -319,7 +319,7 @@ st.markdown(  # Apply custom CSS for chat layout
         border-radius: 15px;  /* Rounded corners for message */
         margin: 10px 10px 10px 0;  /* Margin around message */
         display: inline-block;  /* Make it inline block */
-        max-width: 60%;  /* Maximum width for message */
+        max-width: 80%;  /* Maximum width for message */
         float: left;  /* Align bot messages to the left */
         color: black;  /* Text color */
     }
