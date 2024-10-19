@@ -556,7 +556,7 @@ st.markdown(  # Apply CSS for positioning
         justify-content: space-between;  /* Space between input and button */
     }
     .stTextInput, .stButton {  /* Style for both text input and button */
-        width: 100%;  /* Width of both elements */
+        width: 60%;  /* Width of both elements */
     }
     </style>
     """, unsafe_allow_html=True)
