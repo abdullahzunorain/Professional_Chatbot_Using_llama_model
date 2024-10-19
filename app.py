@@ -475,18 +475,15 @@ else:  # Default theme
 if 'history' not in st.session_state:
     st.session_state.history = []
 
-# Custom CSS for chat layout and input box at bottom
+# Custom CSS for chat layout
 st.markdown(
     """
     <style>
-    /* Chat history container */
     .chat-container {
         max-height: 70vh;  /* Adjust the height as necessary */
         overflow-y: auto;   /* Enable vertical scrolling */
-        margin-bottom: 10px;  /* Ensure space between chat and fixed input */
+        margin-bottom: 10px;  /* Space between chat and input */
     }
-
-    /* User message style */
     .user-message {
         background-color: #E1FFC7;
         text-align: right;
@@ -495,11 +492,9 @@ st.markdown(
         margin: 10px 0 10px 10px;
         display: inline-block;
         max-width: 60%;
-        float: right;
+        float: right;  /* Align user messages to the right */
         color: black;
     }
-
-    /* Bot message style */
     .bot-message {
         background-color: #D1E7FF;
         text-align: left;
@@ -508,41 +503,41 @@ st.markdown(
         margin: 10px 10px 10px 0;
         display: inline-block;
         max-width: 60%;
-        float: left;
+        float: left;  /* Align bot messages to the left */
         color: black;
     }
-
-    /* Clearfix for floated elements */
     .clearfix::after {
         content: "";
         clear: both;
         display: table;
     }
+    </style>
+    """, unsafe_allow_html=True)
 
-    # /* Input container fixed at the bottom of the screen */
-    # .input-container {
-    #     position: fixed;
-    #     bottom: 20px;
-    #     left: 20px;
-    #     width: calc(100% - 40px);
-    #     display: flex;
-    #     z-index: 1;
+    # # /* Input container fixed at the bottom of the screen */
+    # # .input-container {
+    # #     position: fixed;
+    # #     bottom: 20px;
+    # #     left: 20px;
+    # #     width: calc(100% - 40px);
+    # #     display: flex;
+    # #     z-index: 1;
+    # # }
+
+    # /* Input box styling */
+    # .input-box {
+    #     flex-grow: 1;
+    #     margin-right: 10px;
     # }
 
-    /* Input box styling */
-    .input-box {
-        flex-grow: 1;
-        margin-right: 10px;
-    }
-
-    /* Button styling (optional for better appearance) */
-    .stButton button {
-        padding: 8px 16px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-    }
+    # /* Button styling (optional for better appearance) */
+    # .stButton button {
+    #     padding: 8px 16px;
+    #     background-color: #4CAF50;
+    #     color: white;
+    #     border: none;
+    #     border-radius: 4px;
+    # }
     </style>
     """, unsafe_allow_html=True)
 
