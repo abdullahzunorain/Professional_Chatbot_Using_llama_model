@@ -540,17 +540,17 @@ if submit_button and user_input:
         response = chat(user_input)
         st.session_state.history.append({"user": user_input, "bot": response})
 
-# Display chat history in a scrollable container
-with st.container():
-    st.markdown('<div class="chat-container">', unsafe_allow_html=True)
-    for chat in st.session_state.history:
-        # User input style (right side)
-        st.markdown(
-            f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
-            unsafe_allow_html=True)
+# # Display chat history in a scrollable container
+# with st.container():
+#     st.markdown('<div class="chat-container">', unsafe_allow_html=True)
+#     for chat in st.session_state.history:
+#         # User input style (right side)
+#         st.markdown(
+#             f"<div class='clearfix'><div class='user-message'>{chat['user']}</div></div>",
+#             unsafe_allow_html=True)
         
-        # Bot response style (left side)
-        st.markdown(
-            f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
-            unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+#         # Bot response style (left side)
+#         st.markdown(
+#             f"<div class='clearfix'><div class='bot-message'>{chat['bot']}</div></div>",
+#             unsafe_allow_html=True)
+#     st.markdown('</div>', unsafe_allow_html=True)
