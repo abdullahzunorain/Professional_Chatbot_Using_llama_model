@@ -1,5 +1,7 @@
 # Professional Chatbot Using LLaMA Model
 
+![Professional Chatbot](chatbot.jpg)
+
 ## Project Overview
 
 This project focuses on building a highly interactive and professional chatbot using the **LLaMA (Large Language Model Meta AI)** model via an API. The chatbot is designed to simulate natural conversations with users, providing coherent and contextually relevant responses. The chatbot interface is developed using **Streamlit**, a powerful web framework that allows for rapid UI development, while the model API is integrated to handle the natural language processing tasks.
