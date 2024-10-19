@@ -351,7 +351,7 @@ if submit_button and user_input:  # Check if the submit button is pressed and th
         response = chat(user_input)  # Call the chat function to get a response
         st.session_state.history.append({"user": user_input, "bot": response})  # Append the chat history
 
-# Display chat history in a scrollable container with auto-scrolling
+# Display chat history in a scrollable container
 with st.container():  # Create a container for chat history
     chat_container = st.empty()  # Create an empty container for chat history
     with chat_container.container():  # Add chat history to the container
@@ -368,12 +368,18 @@ with st.container():  # Create a container for chat history
                 unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)  # End chat container
 
-    # Automatically scroll to the bottom after new message
-    chat_container.scroll_to_bottom()
+# JavaScript to automatically scroll to the bottom
+scroll_script = """
+<script>
+    var chatContainer = window.parent.document.querySelector('.chat-container');
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+</script>
+"""
+st.markdown(scroll_script, unsafe_allow_html=True)  # Inject the scroll JavaScript into the page
 
 # Scroll down button
 if st.button("Scroll Down"):
-    chat_container.scroll_to_bottom()  # Scroll to the bottom when button is pressed
+    st.markdown(scroll_script, unsafe_allow_html=True)  # Manually trigger scroll when button is pressed
 
 # Position the input field statically at the bottom
 st.markdown(  # Apply CSS for positioning the input field
@@ -385,15 +391,8 @@ st.markdown(  # Apply CSS for positioning the input field
         left: 50%;  /* Center the input box horizontally */
         transform: translateX(-50%);  /* Shift the input box to the left by half of its width */
         width: 60%;  /* Width of the input box */
-        z-index: 1;  /* Ensure it's above other elements */
+        z-index: 999;  /* Bring it to the front */
     }
-    </style>
-    """, unsafe_allow_html=True)
-
-# Position the submit button at the bottom center
-st.markdown(  # Apply CSS for positioning the button
-    """
-    <style>
     .stButton {
         position: fixed;  /* Fix position of the button */
         bottom: 30px;  /* Adjust the distance from the bottom */
